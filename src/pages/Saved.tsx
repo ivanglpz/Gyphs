@@ -15,7 +15,7 @@ const Saved: FC = () => {
   const dbRef = getDatabase(firebaseApp)
   useEffect(() => {
 
-    const starCountRef = ref(dbRef, "saved/");
+    const starCountRef = ref(dbRef, "savedgifs/");
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
 
@@ -24,7 +24,7 @@ const Saved: FC = () => {
       // updateStarCount(postElement, data);
     });
   }, []);
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

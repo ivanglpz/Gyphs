@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
+// import { getDatabase, set, child, push, ref, update } from "firebase/database";
+// import { getFirestore } from "firebase/firestore";
 import Image from "next/image";
-import { FC, useContext } from "react";
+import { FC } from "react";
 import firebaseApp from "../../../FirebaseConf";
-import UserContext from "../../hooks/useContext";
-import { getDatabase, ref, set } from "firebase/database";
-
 interface IData {
   id: string | number;
   title: string;
@@ -24,12 +23,12 @@ const GifImg = styled(Image)`
 `;
 
 const Gif: FC<IData> = (gif) => {
-  // const { savedGif, setSavedGif } = useContext(UserContext);
-  const database = getDatabase(firebaseApp);
+  // const database = getDatabase(firebaseApp);
+  // // console.log(database);
 
-  const handleSavedGif = (gif: IData) => {
-    set(ref(database, "saved/"), [gif]);
-  };
+  // const handleSavedGif = async (gif: IData) => {
+
+  // };
 
   return (
     <div>
@@ -42,7 +41,7 @@ const Gif: FC<IData> = (gif) => {
         width={Number(gif.images.fixed_height.width)}
         height={Number(gif.images.fixed_height.width)}
       />
-      <button onClick={() => handleSavedGif(gif)}>saved</button>
+      {/* <button onClick={() => handleSavedGif(gif)}>saved</button> */}
     </div>
   );
 };
