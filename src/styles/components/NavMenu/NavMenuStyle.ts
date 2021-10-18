@@ -7,12 +7,15 @@ export const StyledMenu = styled.nav`
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 10px;
-  z-index:9;
+  z-index: 9;
   position: fixed;
 `;
 export const MenuNavBar = styled.div`
   display: flex;
   align-items: center;
+  h1 {
+    color: ${colors.blackRaisin};
+  }
 `;
 export const MenuOpts = styled.div`
   ul {
@@ -21,15 +24,12 @@ export const MenuOpts = styled.div`
       align-items: center;
       list-style: none;
       a {
-        color: ${colors.black};
+        color: ${colors.blackRaisin};
         text-decoration: none;
         display: flex;
         align-items: center;
-        p{
-          
-        }
       }
-      a:hover{
+      a:hover {
         text-decoration: underline;
       }
     }

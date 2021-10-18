@@ -4,6 +4,7 @@ import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
 import UserContext from "../hooks/useContext";
+import { colors } from "../styles/colors";
 
 export type IGifData = {
   id: string | number;
@@ -21,6 +22,7 @@ export type IGifData = {
 export interface IData {
   data: IGifData[];
   result: string | undefined;
+  mount: boolean;
 }
 
 interface IFetch {
@@ -36,13 +38,13 @@ const Gifs = styled.div`
   padding: 40px;
   margin: 0 0 0 210px;
 `;
+const tags = ["red velvet", "halo", "Elton John", "Minecraft","Twice"];
 
 const index: FC = () => {
-  const [data, setData] = useState<IData>({} as IData);
+  const [dataInfo, setData] = useState<IData>({} as IData);
   const [savedGif, setSavedGif] = useState<IGifData[]>([]);
-  const [dataMount, setDataMount] = useState<Boolean>(false);
   const [search, setSearch] = useState<string>("");
-  //Hook Gif
+
   const useFetch = async ({ method, search }: IFetch): Promise<void> => {
     const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${
       process.env.NEXT_PUBLIC_API_KEY
@@ -50,46 +52,56 @@ const index: FC = () => {
 
     const resp = await fetch(url);
     const { data }: IData = await resp.json();
-    try {
-      if (data.length > 0) {
-        const newData = data.map((gif: IGifData): IGifData => {
-          return {
-            id: gif.id,
-            title: gif.title,
-            trending_datetime: gif.trending_datetime,
-            images: {
-              fixed_height: {
-                url: gif.images.fixed_height.url,
-                width: gif.images.fixed_height.width,
-              },
+    console.log(data);
+
+    if (data.length > 0) {
+      const newData = data.map((gif: IGifData): IGifData => {
+        return {
+          id: gif.id,
+          title: gif.title,
+          trending_datetime: gif.trending_datetime,
+          images: {
+            fixed_height: {
+              url: gif.images.fixed_height.url,
+              width: gif.images.fixed_height.width,
             },
-            url: gif.url,
-          };
-        });
-        setDataMount(true);
-        search
-          ? setData({ data: newData, result: `Result: ${search}` })
-          : setData({ data: newData, result: "All the Reaction GIFs" });
-      } else {
-        setDataMount(false);
-      }
-    } catch (error) {
-      setDataMount(false);
+          },
+          url: gif.url,
+        };
+      });
+      search
+        ? setData({ data: newData, result: `Result: ${search}`, mount: true })
+        : setData({
+            data: newData,
+            result: method,
+            mount: true,
+          });
+    } else {
+      setData({ ...dataInfo, mount: false });
     }
+  };
+
+  const handleTags = (tag: string): void => {
+    setSearch(tag);
+    useFetch({ method: "search", search: tag });
+    setData({ ...dataInfo, mount: false });
   };
 
   const handleSubmit = (event: { preventDefault: () => void }): void => {
     event.preventDefault();
     if (!search) {
-      useFetch({ method: "trending", search: "" });
+      useFetch({ method: "trending" });
+      setData({ ...dataInfo, mount: false });
     } else {
       useFetch({ method: "search", search: search });
+      setData({ ...dataInfo, mount: false });
     }
   };
 
   useEffect(() => {
-    useFetch({ method: "trending", search: "" });
+    useFetch({ method: "trending" });
   }, []);
+  console.log(dataInfo);
 
   return (
     <UserContext.Provider value={{ savedGif, setSavedGif }}>
@@ -103,10 +115,18 @@ const index: FC = () => {
               setSearch={setSearch}
             />
           </nav>
-          {dataMount ? (
+          <div>
+            #Tags
+            {tags.map((tag) => (
+              <button key={tag} onClick={() => handleTags(tag)}>
+                {tag}
+              </button>
+            ))}
+          </div>
+          {dataInfo.mount ? (
             <>
-              {data.result && <p>{data.result}</p>}
-              <GifsContent data={data.data} />
+              {dataInfo.result && <p>{dataInfo.result}</p>}
+              <GifsContent data={dataInfo.data} />
             </>
           ) : (
             <svg
@@ -116,8 +136,8 @@ const index: FC = () => {
                 display: "block",
                 shapeRendering: "auto",
               }}
-              width="100px"
-              height="100px"
+              width="80px"
+              height="80px"
               viewBox="0 0 100 100"
               preserveAspectRatio="xMidYMid"
             >
@@ -126,7 +146,7 @@ const index: FC = () => {
                 cy="50"
                 r="32"
                 strokeWidth="8"
-                stroke="#3246d3"
+                stroke={`${colors.capri}`}
                 strokeDasharray="50.26548245743669 50.26548245743669"
                 fill="none"
                 strokeLinecap="round"
@@ -145,7 +165,7 @@ const index: FC = () => {
                 cy="50"
                 r="23"
                 strokeWidth="8"
-                stroke="#1d2a89"
+                stroke={`${colors.greenRusian}`}
                 strokeDasharray="36.12831551628262 36.12831551628262"
                 strokeDashoffset="36.12831551628262"
                 fill="none"
