@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 import { FC, useEffect, useRef, useState } from "react";
+import Masonry from "react-masonry-component";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
+import Tags from "../components/Tags/Tags";
 import UserContext from "../hooks/useContext";
 import { colors } from "../styles/colors";
+import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 
 export type IGifData = {
   id: string | number;
@@ -37,13 +40,15 @@ export const StyledApp = styled.main`
 const Gifs = styled.div`
   padding: 40px;
   margin: 0 0 0 210px;
+  width: 100%;
 `;
-const tags = ["red velvet", "halo", "Elton John", "Minecraft","Twice"];
+const tags = ["Chuck Norris", "Gatos", "John", "Negro", "Homero"];
 
 const index: FC = () => {
   const [dataInfo, setData] = useState<IData>({} as IData);
   const [savedGif, setSavedGif] = useState<IGifData[]>([]);
   const [search, setSearch] = useState<string>("");
+
 
   const useFetch = async ({ method, search }: IFetch): Promise<void> => {
     const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${
@@ -52,7 +57,6 @@ const index: FC = () => {
 
     const resp = await fetch(url);
     const { data }: IData = await resp.json();
-    console.log(data);
 
     if (data.length > 0) {
       const newData = data.map((gif: IGifData): IGifData => {
@@ -117,16 +121,18 @@ const index: FC = () => {
           </nav>
           <div>
             #Tags
-            {tags.map((tag) => (
-              <button key={tag} onClick={() => handleTags(tag)}>
-                {tag}
-              </button>
-            ))}
+            <div>
+              {tags.map((tag) => (
+                <Tags key={tag} tag={tag} handleTags={handleTags} />
+              ))}
+            </div>
           </div>
           {dataInfo.mount ? (
             <>
               {dataInfo.result && <p>{dataInfo.result}</p>}
-              <GifsContent data={dataInfo.data} />
+              <StyleGifsContent>
+                <GifsContent data={dataInfo.data} />
+              </StyleGifsContent>
             </>
           ) : (
             <svg

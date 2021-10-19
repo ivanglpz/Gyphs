@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
 import { StyleGifsContent } from "../../styles/components/GifsContent/GifsContentStyle";
 import Gif from "../Gif/Gif";
+import styled from "@emotion/styled";
 
 interface IData {
   data: {
@@ -13,17 +14,37 @@ interface IData {
         width: string | number;
       };
     };
-    url:string
+    url: string;
   }[];
 }
+const GifBox = styled.div`
+  /* background-color: #eee; */
+  display: inline-block;
+  margin: 0.5rem 1rem;
+  width: 100%;
+`;
+const GifsContent: FC<IData> = ({ data }) => {
+  const [loading, setLoading] = useState(false);
+  const counter = useRef(0);
 
-const GifsContent: FC<IData> = ({data}) => {
+  const imageLoaded = () => {
+    counter.current += 1;
+    if (counter.current >= data.length) {
+      setLoading(true);
+    }
+  };
   return (
-    <StyleGifsContent>
+    <>
+    {/* {loading === true && <p>loading</p>} */}
       {data?.map((gif) => (
-        <Gif key={gif.id} {...gif} />
+        <GifBox key={gif.id}>
+          <Gif
+            gif={gif}
+             imageLoaded={imageLoaded} loading={loading}
+          />
+        </GifBox>
       ))}
-    </StyleGifsContent>
+    </>
   );
 };
 

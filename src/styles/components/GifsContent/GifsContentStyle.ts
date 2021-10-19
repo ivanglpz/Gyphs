@@ -1,12 +1,16 @@
-import styled from "@emotion/styled"
-
-
+import styled from "@emotion/styled";
 
 export const StyleGifsContent = styled.div`
-display:grid;
-margin: 10px 0 0 0;
-grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-width: 800px;
-  gap: 15px;
+  column-count: 3;
+  column-gap: 1em;
+  /* column- */
+  /* column-rule:; */
 
-`
+  @media only screen and (max-width: 1023px) and (min-width: 768px) {
+    column-count: 2;
+  }
+
+  @media only screen and (max-width: 767px) and (min-width: 540px) {
+    column-count: 1;
+  }
+`;
