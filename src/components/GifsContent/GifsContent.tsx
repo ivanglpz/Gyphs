@@ -24,15 +24,7 @@ const GifBox = styled.div`
   width: 100%;
 `;
 const GifsContent: FC<IData> = ({ data }) => {
-  const [loading, setLoading] = useState(false);
-  const counter = useRef(0);
 
-  const imageLoaded = () => {
-    counter.current += 1;
-    if (counter.current >= data.length) {
-      setLoading(true);
-    }
-  };
   return (
     <>
     {/* {loading === true && <p>loading</p>} */}
@@ -40,7 +32,7 @@ const GifsContent: FC<IData> = ({ data }) => {
         <GifBox key={gif.id}>
           <Gif
             gif={gif}
-             imageLoaded={imageLoaded} loading={loading}
+            //  imageLoaded={imageLoaded} loading={loading}
           />
         </GifBox>
       ))}

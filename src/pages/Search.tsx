@@ -28,7 +28,7 @@ export interface IData {
   mount: boolean;
 }
 
-interface IFetch {
+export interface IFetch {
   method: string;
   search?: string;
 }
@@ -48,7 +48,6 @@ const index: FC = () => {
   const [dataInfo, setData] = useState<IData>({} as IData);
   const [savedGif, setSavedGif] = useState<IGifData[]>([]);
   const [search, setSearch] = useState<string>("");
-
 
   const useFetch = async ({ method, search }: IFetch): Promise<void> => {
     const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${
@@ -102,9 +101,6 @@ const index: FC = () => {
     }
   };
 
-  useEffect(() => {
-    useFetch({ method: "trending" });
-  }, []);
   console.log(dataInfo);
 
   return (

@@ -36,7 +36,7 @@ const NavMenu: FC = () => {
       <S.MenuOpts>
       <ul>
           <li>
-            <Link href="/" passHref>
+            <Link href="/Home" passHref>
               <a>
                 <svg
                   width="24"
@@ -56,7 +56,7 @@ const NavMenu: FC = () => {
             </Link>
           </li>
           <li>
-            <Link href="/Saved">
+            <Link href="/Search">
               <a>
                 <svg
                   width="24"
@@ -73,7 +73,7 @@ const NavMenu: FC = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p>Saved</p>
+                <p>Search</p>
               </a>
             </Link>
           </li>

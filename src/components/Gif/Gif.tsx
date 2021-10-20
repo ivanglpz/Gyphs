@@ -32,15 +32,8 @@ const Gif: FC<IData> = ({loading,gif,imageLoaded}) => {
 
   return (
     <GifImg
-      // loader={({ width }: { width: number }) =>
-      //   `${gif.images.fixed_height.url}?w=${width}&q=${75}`
-      // }
-      style={{display: loading ? "block" : "none"}}
       src={`${gif.images.fixed_height.url}`}
       alt={gif.title}
-      onLoad={imageLoaded}
-      // width={Number(gif.images.fixed_height.width)}
-      // height={Number(gif.images.fixed_height.width)}
     />
   );
 };
