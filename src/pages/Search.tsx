@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { FC, useEffect, useRef, useState } from "react";
-import Masonry from "react-masonry-component";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
