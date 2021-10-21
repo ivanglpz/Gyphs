@@ -40,15 +40,15 @@ export const FormButtonTextDelete = styled.button`
   justify-content: center;
   border: none;
   background-color: transparent;
-  
+
   border-radius: 10px;
-  &:hover{
-    svg{
-      path{
-        fill:white;
+  &:hover {
+    svg {
+      path {
+        fill: white;
       }
     }
     background-color: ${colors.red};
     /* background-color: ${colors.red}; */
   }
-`
+`;

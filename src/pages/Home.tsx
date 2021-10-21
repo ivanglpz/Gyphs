@@ -1,34 +1,29 @@
+import styled from "@emotion/styled";
 import { FC } from "react";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import useFetch from "../hooks/useFetch";
-import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import { colors } from "../styles/colors";
-import styled from "@emotion/styled";
-// import styled from "@emotion/styled/types/base";
+import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 
-
-// const tags = ["Chuck Norris", "Gatos", "John", "Negro", "Homero"];
-const StyledBox  =styled.div`
+const StyledBox = styled.div`
   display: flex;
-`
+
+`;
 
 const Home: FC = () => {
   const newData = useFetch({ method: "trending" });
-
-  console.log(newData);
-
   return (
     <StyledBox>
       <NavMenu />
-      <div>
+      <div style={{width:"800px", margin:"0 0 0 230px"}}>
         {newData.mount ? (
-          <div style={{margin:"0 0 0 210px"}}>
+          <>
             {newData.result && <p>#{newData.result}</p>}
             <StyleGifsContent>
               <GifsContent data={newData.data} />
             </StyleGifsContent>
-          </div>
+          </>
         ) : (
           <svg
             style={{

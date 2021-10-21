@@ -24,10 +24,9 @@ const GifBox = styled.div`
   width: 100%;
 `;
 const GifsContent: FC<IData> = ({ data }) => {
-
   return (
     <>
-    {/* {loading === true && <p>loading</p>} */}
+      {/* {loading === true && <p>loading</p>} */}
       {data?.map((gif) => (
         <GifBox key={gif.id}>
           <Gif

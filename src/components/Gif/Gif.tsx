@@ -1,13 +1,10 @@
 import styled from "@emotion/styled";
-import { IncomingMessage } from "http";
-// import { getDatabase, set, child, push, ref, update } from "firebase/database";
-// import { getFirestore } from "firebase/firestore";
 import Image from "next/image";
-import { useRef } from "react";
-import { FC, useState } from "react";
-import firebaseApp from "../../../FirebaseConf";
+import { FC } from "react";
+
 interface IData {
-  gif:{  id: string | number;
+  gif: {
+    id: string | number;
     title: string;
     trending_datetime: string;
     images: {
@@ -16,9 +13,10 @@ interface IData {
         width: string | number;
       };
     };
-    url: string;}
-    loading?:boolean
-    imageLoaded?:()=>void
+    url: string;
+  };
+  loading?: boolean;
+  imageLoaded?: () => void;
 }
 
 const GifImg = styled.img`
@@ -28,11 +26,11 @@ const GifImg = styled.img`
   border-radius: 10px;
 `;
 
-const Gif: FC<IData> = ({loading,gif,imageLoaded}) => {
-
+const Gif: FC<IData> = ({ loading, gif, imageLoaded }) => {
   return (
     <GifImg
-      src={`${gif.images.fixed_height.url}`}
+      loading="lazy"
+      src={gif.images.fixed_height.url}
       alt={gif.title}
     />
   );

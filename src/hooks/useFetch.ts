@@ -11,7 +11,7 @@ const useFetch = ({ method, search }: IFetch) => {
 
     const resp = await fetch(url);
     const { data }: IData = await resp.json();
-    
+
     if (data.length > 0) {
       const newData = data.map((gif: IGifData): IGifData => {
         return {

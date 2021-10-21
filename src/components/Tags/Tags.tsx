@@ -30,12 +30,11 @@ const colorsTags = [
 ];
 
 const Tags: FC<Props> = ({ tag, handleTags }) => {
-  const [state, setstate] = useState(Math.floor(Math.random() * colorsTags.length))
+  const [state, setstate] = useState(
+    Math.floor(Math.random() * colorsTags.length)
+  );
   return (
-    <ButtonTag
-      onClick={() => handleTags(tag)}
-      bgColor={colorsTags[state]}
-    >
+    <ButtonTag onClick={() => handleTags(tag)} bgColor={colorsTags[state]}>
       {tag}
     </ButtonTag>
   );
