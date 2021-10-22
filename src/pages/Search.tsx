@@ -5,19 +5,9 @@ import NavMenu from '../components/NavMenu/NavMenu';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Loading from '../components/Svg/Loading';
 import Tags from '../components/Tags/Tags';
-// import Tags from '../components/Tags/Tags';
 import { IData, IParams, IStateData } from '../hooks/types';
 import { colors } from '../styles/colors';
 import { StyleGifsContent } from '../styles/components/GifsContent/GifsContentStyle';
-
-
-
-// export interface IData {
-//   data: IGifData[];
-//   result: string | undefined;
-//   mount: boolean;
-// }
-
 export interface IFetch {
   method: string;
   search?: string;

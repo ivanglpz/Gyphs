@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { FC, useEffect, useState } from "react";
 import Tags from "../Tags/Tags";
 import Url from "../Svg/Url";
+import Image from "next/image"
 
 
 interface IGifData {
@@ -54,7 +55,7 @@ const Gif: FC<IGifData> = ({ gif }) => {
   return (
     <div style={{ display: "flex" }}>
       <GifImg
-        loading="lazy"
+      loading="lazy"
         src={gif.images.fixed_height.url}
         alt={gif.title}
       />
