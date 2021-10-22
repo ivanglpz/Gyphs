@@ -10,15 +10,25 @@ import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentSt
 
 const StyledBox = styled.div`
   display: flex;
+  @media (max-width:768px){
+    display: block;
+  }
 
 `;
-
+const Gifs = styled.div`
+  width: 800px;
+  margin: 20px 0 0 230px;
+  @media (max-width:767px) {
+    margin: 0;
+    padding: 20px;
+  }
+`
 const Home: FC = () => {
   const newData:IStateData = useFetch({ method: "trending" });
   return (
     <StyledBox>
       <NavMenu />
-      <div style={{ width: "800px", margin: "20px 0 0 230px" }}>
+      <Gifs>
         {newData.mount ? (
           <>
             {newData.result && <h2>Today in #{newData.result}</h2>}
@@ -29,7 +39,7 @@ const Home: FC = () => {
         ) : (
           <Loading color={{ colorPrimary: colors.capri, colorSecondary: colors.blueBlizzard }} />
         )}
-      </div>
+      </Gifs>
     </StyledBox>
   );
 };

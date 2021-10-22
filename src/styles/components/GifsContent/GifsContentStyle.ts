@@ -1,15 +1,26 @@
 import styled from "@emotion/styled";
 
 export const StyleGifsContent = styled.div`
-/* display: grid; */
+  /* display: grid; */
   column-count: 3;
   column-gap: 1rem;
+  @media (min-width:610px) and (max-width:768px){
+  column-count: 3;
 
-  @media only screen and (max-width: 1023px) and (min-width: 768px) {
-    column-count: 2;
   }
+  @media (min-width:425px) and (max-width:610px){
+  column-count: 2;
 
-  @media only screen and (max-width: 767px) and (min-width: 540px) {
+  }
+  @media (max-width:425px)  {
+    column-count: 2;
+
+  }
+  @media (max-width:375px) {
+    column-count: 2;
+
+  }
+  @media (max-width: 320px)  {
     column-count: 1;
   }
 `;

@@ -95,9 +95,6 @@ const Search: FC = () => {
       setData({ ...dataInfo, mount: false });
     }
   };
-
-  console.log(dataInfo);
-
   return (
     <StyledApp>
       <NavMenu />
