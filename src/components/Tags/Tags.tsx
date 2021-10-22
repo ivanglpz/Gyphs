@@ -1,17 +1,20 @@
 import styled from "@emotion/styled";
 import { FC, MouseEventHandler, useMemo, useState } from "react";
-import Url from "../Svg/Url";
 
 interface Props {
   handleTags: MouseEventHandler<HTMLButtonElement>;
-  active:boolean
+  active?:boolean
+  text?:string
+  objs:any
+  position:boolean
 }
 interface IButtonTag {
   bgColor: string;
+  position:boolean
 }
 const ButtonTag = styled.button<IButtonTag>`
   border: none;
-  position: absolute;
+  position: ${({position})=> position ? "absolute" : "none"};
   margin: 10px;
   background-color: ${({ bgColor }) => `rgb(${bgColor})`};
   padding: 5px;
@@ -32,13 +35,13 @@ const colorsTags:string[] = [
   "255, 16, 31",
 ];
 
-const Tags: FC<Props> = ({ handleTags,active}) => {
+const Tags: FC<Props> = ({ handleTags,active,objs,position}) => {
   const [state, setstate] = useState(
     Math.floor(Math.random() * colorsTags.length)
   );
   return (
-    <ButtonTag onClick={handleTags} bgColor={colorsTags[state]}>
-      <Url color={active ? "green" : "white"}/>
+    <ButtonTag position={position} onClick={handleTags} bgColor={colorsTags[state]}>
+      {objs}
     </ButtonTag>
   );
 };

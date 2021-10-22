@@ -4,6 +4,7 @@ import GifsContent from '../components/GifsContent/GifsContent';
 import NavMenu from '../components/NavMenu/NavMenu';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Loading from '../components/Svg/Loading';
+import Tags from '../components/Tags/Tags';
 // import Tags from '../components/Tags/Tags';
 import { IData, IParams, IStateData } from '../hooks/types';
 import { colors } from '../styles/colors';
@@ -42,7 +43,7 @@ const Gifs = styled.div`
     align-items: center;
   }
 `;
-const tags = ["Chuck Norris", "Gatos", "John", "Negro", "Homero"];
+const tags = ["Red Velvet","Queendom", "Maroon 5", "Elton John", "John Legend", "Master Chief"];
 
 const Search: FC = () => {
   const [dataInfo, setData] = useState<IStateData>({} as IStateData);
@@ -120,9 +121,9 @@ const Search: FC = () => {
         <div>
           #Tags
           <div>
-            {/* {tags.map((tag) => (
-                <Tags key={tag} tag={tag} handleTags={handleTags} />
-              ))} */}
+            {tags.map((tag) => (
+                <Tags position={false} key={tag} objs={tag} handleTags={()=>handleTags(tag)} />
+              ))}
           </div>
         </div>
         {dataInfo.mount ? (

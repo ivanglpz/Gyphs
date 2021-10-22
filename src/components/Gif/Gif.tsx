@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { FC, useEffect, useState } from "react";
 import Tags from "../Tags/Tags";
+import Url from "../Svg/Url";
+
 
 interface IGifData {
   gif: {
@@ -50,14 +52,14 @@ const Gif: FC<IGifData> = ({ gif }) => {
     }
   }, [copy])
   return (
-    <div style={{display:"flex"}}>
+    <div style={{ display: "flex" }}>
       <GifImg
         loading="lazy"
         src={gif.images.fixed_height.url}
         alt={gif.title}
       />
 
-      <Tags handleTags={() => copyUrl(gif.url)} active={copy} />
+      <Tags position={true} handleTags={() => copyUrl(gif.url)} active={copy} objs={<Url color={copy ? "green" : "white"} />} />
 
     </div>
   );
