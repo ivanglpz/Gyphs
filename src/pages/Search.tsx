@@ -110,7 +110,7 @@ const Search: FC = () => {
         </nav>
         <div>
           #Tags
-          <div>
+          <div style={{display:"flex","alignItems":"center","flexWrap":"wrap",justifyContent:"flex-start"}}>
             {tags.map((tag) => (
                 <Tags position={false} key={tag} objs={tag} handleTags={()=>handleTags(tag)} />
               ))}

@@ -26,7 +26,8 @@ interface IGifData {
       description?: string
     }
   }
-
+  // load: boolean
+  imgload?: any
 }
 
 const GifImg = styled.img`
@@ -38,7 +39,7 @@ const GifImg = styled.img`
 `;
 
 
-const Gif: FC<IGifData> = ({ gif }) => {
+const Gif: FC<IGifData> = ({ gif,  imgload }) => {
   const [copy, setCopy] = useState<boolean>(false);
 
   const copyUrl = (url: string) => {
@@ -55,9 +56,10 @@ const Gif: FC<IGifData> = ({ gif }) => {
   return (
     <div style={{ display: "flex" }}>
       <GifImg
-      loading="lazy"
+        loading="lazy"
         src={gif.images.fixed_height.url}
         alt={gif.title}
+        onLoad={imgload}
       />
 
       <Tags position={true} handleTags={() => copyUrl(gif.url)} active={copy} objs={<Url color={copy ? "green" : "white"} />} />
