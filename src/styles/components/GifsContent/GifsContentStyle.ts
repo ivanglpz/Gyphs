@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
 
 export const StyleGifsContent = styled.div`
+/* display: grid; */
   column-count: 3;
-  column-gap: 1em;
-  /* column- */
-  /* column-rule:; */
+  column-gap: 1rem;
 
   @media only screen and (max-width: 1023px) and (min-width: 768px) {
     column-count: 2;

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { FC, useEffect, useRef, useState } from "react";
-import Masonry from "react-masonry-component";
+import { FC, useState } from "react";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -50,9 +49,8 @@ const index: FC = () => {
   const [search, setSearch] = useState<string>("");
 
   const useFetch = async ({ method, search }: IFetch): Promise<void> => {
-    const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${
-      process.env.NEXT_PUBLIC_API_KEY
-    }${search ? `&q=${search}` : ""}`;
+    const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${process.env.NEXT_PUBLIC_API_KEY
+      }${search ? `&q=${search}` : ""}`;
 
     const resp = await fetch(url);
     const { data }: IData = await resp.json();
@@ -75,10 +73,10 @@ const index: FC = () => {
       search
         ? setData({ data: newData, result: `Result: ${search}`, mount: true })
         : setData({
-            data: newData,
-            result: method,
-            mount: true,
-          });
+          data: newData,
+          result: method,
+          mount: true,
+        });
     } else {
       setData({ ...dataInfo, mount: false });
     }
