@@ -6,6 +6,7 @@ export const StyledForm = styled.form`
   justify-content: space-between;
   align-items: center;
   width: 348px;
+
   height: 31px;
   background: ${colors.gray};
   border-radius: 10px;
@@ -14,6 +15,9 @@ export const StyledForm = styled.form`
     border: none;
     background-color: transparent;
     padding: 0 0 0 5px;
+  }
+  @media (max-width:767px){
+    width: auto;
   }
 `;
 export const FormButtonSearch = styled.button`

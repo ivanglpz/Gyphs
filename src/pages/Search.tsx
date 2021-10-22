@@ -24,12 +24,23 @@ export interface IFetch {
 
 export const StyledApp = styled.main`
   display: flex;
+  @media (max-width:768px) {
+    display: block;
+
+  }
 `;
 
 const Gifs = styled.div`
   padding: 40px;
   margin: 0 0 0 210px;
   width: 100%;
+  @media(max-width:767px){
+    padding: 20px;
+    margin: 0px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+  }
 `;
 const tags = ["Chuck Norris", "Gatos", "John", "Negro", "Homero"];
 
