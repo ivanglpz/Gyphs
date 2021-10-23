@@ -16,7 +16,7 @@ export const StyledForm = styled.form`
     background-color: transparent;
     padding: 0 0 0 5px;
   }
-  @media (max-width:767px){
+  @media (max-width: 767px) {
     width: auto;
   }
 `;
@@ -37,5 +37,4 @@ export const FormButtonTextDelete = styled.button`
   background-color: transparent;
   cursor: pointer;
   border-radius: 10px;
-
 `;

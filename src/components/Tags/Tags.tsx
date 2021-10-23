@@ -3,18 +3,18 @@ import { FC, MouseEventHandler, ReactElement, useState } from "react";
 
 interface Props {
   handle: MouseEventHandler<HTMLButtonElement>;
-  objs: string | ReactElement
+  objs: string | ReactElement;
   props: {
-    margin: string
-    position: string
-  }
+    margin: string;
+    position: string;
+  };
 }
 interface IButtonTag {
   props: {
-    position: string
-    margin: string
-    bgColor: string
-  }
+    position: string;
+    margin: string;
+    bgColor: string;
+  };
 }
 const ButtonTag = styled.button<IButtonTag>`
   border: none;
@@ -25,31 +25,30 @@ const ButtonTag = styled.button<IButtonTag>`
   border-radius: 10px;
   color: white;
   cursor: pointer;
-  svg{
-    path{
+  svg {
+    path {
       fill: white;
     }
   }
   &:hover {
-    svg{
-      path{
+    svg {
+      path {
         fill: ${({ props }) => `rgb(${props.bgColor})`};
       }
     }
-  color: ${({ props }) => `rgb(${props.bgColor})`};
+    color: ${({ props }) => `rgb(${props.bgColor})`};
 
     background-color: #f8f8f8;
   }
-  &:active{
-    svg{
-      path{
+  &:active {
+    svg {
+      path {
         fill: white;
       }
     }
-  color: white;
+    color: white;
 
-  background-color: ${({ props }) => `rgb(${props.bgColor})`};
-
+    background-color: ${({ props }) => `rgb(${props.bgColor})`};
   }
 `;
 const colorsTags: string[] = [
@@ -68,7 +67,10 @@ const Tags: FC<Props> = ({ handle, objs, props }) => {
     Math.floor(Math.random() * colorsTags.length)
   );
   return (
-    <ButtonTag props={{ ...props, bgColor: colorsTags[state] }} onClick={handle} >
+    <ButtonTag
+      props={{ ...props, bgColor: colorsTags[state] }}
+      onClick={handle}
+    >
       {objs}
     </ButtonTag>
   );

@@ -10,26 +10,25 @@ import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentSt
 
 const StyledBox = styled.div`
   display: flex;
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column-reverse;
   }
-
 `;
 
 interface IGifs {
-  screen: boolean
+  screen: boolean;
 }
 const Gifs = styled.div<IGifs>`
   width: 800px;
   margin: 20px 0 0 230px;
-  @media (max-width:767px) {
+  @media (max-width: 767px) {
     margin: 0;
-  width: auto;
-height: ${({ screen }) => screen ? "auto" : "100vh"};
+    width: auto;
+    height: ${({ screen }) => (screen ? "auto" : "100vh")};
     padding: 20px;
   }
-`
+`;
 const Home: FC = () => {
   const newData: IStateData = useFetch({ method: "trending" });
   return (
@@ -44,7 +43,12 @@ const Home: FC = () => {
             </StyleGifsContent>
           </>
         ) : (
-          <Loading color={{ colorPrimary: colors.capri, colorSecondary: colors.blueBlizzard }} />
+          <Loading
+            color={{
+              colorPrimary: colors.capri,
+              colorSecondary: colors.blueBlizzard,
+            }}
+          />
         )}
       </Gifs>
     </StyledBox>

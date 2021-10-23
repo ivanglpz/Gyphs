@@ -12,7 +12,7 @@ const useFetch = ({ method, search }: IParams) => {
     const resp = await fetch(url);
     const { data }: IStateData = await resp.json();
     console.log(data);
-    
+
     if (data.length > 0) {
       const newData = data.map((gif: IData): IData => {
         return {
@@ -23,17 +23,17 @@ const useFetch = ({ method, search }: IParams) => {
             fixed_height: {
               url: gif.images.fixed_height.url,
               width: gif.images.fixed_height.width,
-              height: gif.images.fixed_height.height
+              height: gif.images.fixed_height.height,
             },
           },
           url: gif.url,
-          user:{
-            avatar_url:gif?.user?.avatar_url,
-            display_name:gif?.user?.display_name,
-            username:gif?.user?.username,
-            profile_url : gif.user?.profile_url,
-            description: gif.user?.description
-          }
+          user: {
+            avatar_url: gif?.user?.avatar_url,
+            display_name: gif?.user?.display_name,
+            username: gif?.user?.username,
+            profile_url: gif.user?.profile_url,
+            description: gif.user?.description,
+          },
         };
       });
       search

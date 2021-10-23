@@ -10,7 +10,7 @@ export const StyledMenu = styled.nav`
   z-index: 9;
   position: fixed;
   /* display: block; */
-  @media (max-width:767px){
+  @media (max-width: 767px) {
     display: none;
   }
 `;
@@ -40,10 +40,9 @@ export const MenuOpts = styled.div`
   }
 `;
 
-
 export const MenuMobile = styled.div`
-display: none;
-  @media(max-width:768px){
+  display: none;
+  @media (max-width: 768px) {
     /* margin: 20px 0 0 0; */
     display: flex;
     align-items: center;
@@ -52,8 +51,8 @@ display: none;
     /* width: 100%; */
     position: sticky;
     bottom: 0;
-    z-index:999;
+    z-index: 999;
     background-color: white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
-`
+`;

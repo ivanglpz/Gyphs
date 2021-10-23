@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import { FC, useEffect, useState } from "react";
 import Tags from "../Tags/Tags";
 import Url from "../Svg/Url";
-import Image from "next/image"
-
+import Image from "next/image";
 
 interface IGifData {
   gif: {
@@ -19,15 +18,15 @@ interface IGifData {
     };
     url: string;
     user?: {
-      avatar_url?: string
-      display_name?: string
-      username?: string
-      profile_url?: string
-      description?: string
-    }
-  }
+      avatar_url?: string;
+      display_name?: string;
+      username?: string;
+      profile_url?: string;
+      description?: string;
+    };
+  };
   // load: boolean
-  imgload?: any
+  imgload?: any;
 }
 
 const GifImg = styled.img`
@@ -35,24 +34,22 @@ const GifImg = styled.img`
   display: inline-block;
   width: 100%;
   border-radius: 10px;
-
 `;
 
-
-const Gif: FC<IGifData> = ({ gif,  imgload }) => {
+const Gif: FC<IGifData> = ({ gif, imgload }) => {
   const [copy, setCopy] = useState<boolean>(false);
 
   const copyUrl = (url: string) => {
-    navigator.clipboard.writeText(url)
-    setCopy(true)
-  }
+    navigator.clipboard.writeText(url);
+    setCopy(true);
+  };
   useEffect(() => {
     if (copy) {
       setTimeout(() => {
-        setCopy(false)
+        setCopy(false);
       }, 900);
     }
-  }, [copy])
+  }, [copy]);
   return (
     <div style={{ display: "flex" }}>
       <GifImg
@@ -62,8 +59,11 @@ const Gif: FC<IGifData> = ({ gif,  imgload }) => {
         onLoad={imgload}
       />
 
-      <Tags props={{margin:"10px" , position:"absolute"}} handle={() => copyUrl(gif.url)}  objs={<Url color={copy ? "green" : "white"} />} />
-
+      <Tags
+        props={{ margin: "10px", position: "absolute" }}
+        handle={() => copyUrl(gif.url)}
+        objs={<Url color={copy ? "green" : "white"} />}
+      />
     </div>
   );
 };

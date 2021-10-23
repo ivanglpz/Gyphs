@@ -1,4 +1,3 @@
-
 export interface IData {
   id: string;
   title: string;
@@ -11,13 +10,13 @@ export interface IData {
     };
   };
   url: string;
-  user?:{
-    avatar_url?:string
-    display_name?:string
-    username?:string
-    profile_url?:string
-    description?:string
-  }
+  user?: {
+    avatar_url?: string;
+    display_name?: string;
+    username?: string;
+    profile_url?: string;
+    description?: string;
+  };
 }
 
 export interface IParams {
@@ -29,4 +28,4 @@ export type IStateData = {
   data: IData[];
   result: string;
   mount: boolean;
-}
+};

@@ -198,7 +198,6 @@ const NavMenu: FC = () => {
             </svg>
           </a>
         </Link>
-
       </S.MenuMobile>
     </>
   );
