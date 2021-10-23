@@ -1,31 +1,58 @@
 import styled from "@emotion/styled";
-import { FC, MouseEventHandler, useMemo, useState } from "react";
+import { FC, MouseEventHandler, ReactElement, useState } from "react";
 
 interface Props {
-  handleTags: MouseEventHandler<HTMLButtonElement>;
-  active?:boolean
-  text?:string
-  objs:any
-  position:boolean
+  handle: MouseEventHandler<HTMLButtonElement>;
+  objs: string | ReactElement
+  props: {
+    margin: string
+    position: string
+  }
 }
 interface IButtonTag {
-  bgColor: string;
-  position:boolean
+  props: {
+    position: string
+    margin: string
+    bgColor: string
+  }
 }
 const ButtonTag = styled.button<IButtonTag>`
   border: none;
-  position: ${({position})=> position ? "absolute" : "none"};
-  margin: 10px;
-  background-color: ${({ bgColor }) => `rgb(${bgColor})`};
+  position: ${({ props }) => props.position};
+  margin: ${({ props }) => props.margin};
+  background-color: ${({ props }) => `rgb(${props.bgColor})`};
   padding: 5px;
   border-radius: 10px;
   color: white;
   cursor: pointer;
+  svg{
+    path{
+      fill: white;
+    }
+  }
   &:hover {
-    background-color: ${({ bgColor }) => `rgba(${bgColor},0.5)`};
+    svg{
+      path{
+        fill: ${({ props }) => `rgb(${props.bgColor})`};
+      }
+    }
+  color: ${({ props }) => `rgb(${props.bgColor})`};
+
+    background-color: #f8f8f8;
+  }
+  &:active{
+    svg{
+      path{
+        fill: white;
+      }
+    }
+  color: white;
+
+  background-color: ${({ props }) => `rgb(${props.bgColor})`};
+
   }
 `;
-const colorsTags:string[] = [
+const colorsTags: string[] = [
   "129, 214, 227",
   "227, 208, 129",
   "13, 50, 77",
@@ -36,12 +63,12 @@ const colorsTags:string[] = [
   "255, 16, 31",
 ];
 
-const Tags: FC<Props> = ({ handleTags,active,objs,position}) => {
+const Tags: FC<Props> = ({ handle, objs, props }) => {
   const [state, setstate] = useState(
     Math.floor(Math.random() * colorsTags.length)
   );
   return (
-    <ButtonTag position={position} onClick={handleTags} bgColor={colorsTags[state]}>
+    <ButtonTag props={{ ...props, bgColor: colorsTags[state] }} onClick={handle} >
       {objs}
     </ButtonTag>
   );

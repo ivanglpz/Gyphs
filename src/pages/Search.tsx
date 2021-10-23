@@ -35,7 +35,7 @@ const Gifs = styled.div<IGifs>`
     margin: 0px;
     display: flex;
     flex-direction:column;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 const tags = ["Red Velvet", "Whil", "Maroon 5", "Morgan",];
@@ -109,6 +109,7 @@ const Search: FC = () => {
       <NavMenu />
       <Gifs screen={dataInfo?.mount === false ? true : false}>
         <div style={{display:"flex", flexDirection:"column", justifyContent:"flex-start"}}>
+          <h2 style={{width:"130px"}}>Find your favorite gif</h2>
           <nav>
             <SearchBar
               search={search}
@@ -116,9 +117,9 @@ const Search: FC = () => {
               setSearch={setSearch}
             />
           </nav>
-          <div style={{ display: "flex", "alignItems": "center", "flexWrap": "wrap", justifyContent: "flex-start" }}>
+          <div style={{ display: "flex", "flexWrap": "wrap",margin:"10px 0"}}>
             {tags.map((tag) => (
-              <Tags position={false} key={tag} objs={tag} handleTags={() => handleTags(tag)} />
+              <Tags props={{margin:"0 10px", position:"none"}} key={tag} objs={tag} handle={() => handleTags(tag)} />
             ))}
           </div>
 

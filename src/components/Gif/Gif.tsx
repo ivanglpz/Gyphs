@@ -62,7 +62,7 @@ const Gif: FC<IGifData> = ({ gif,  imgload }) => {
         onLoad={imgload}
       />
 
-      <Tags position={true} handleTags={() => copyUrl(gif.url)} active={copy} objs={<Url color={copy ? "green" : "white"} />} />
+      <Tags props={{margin:"10px" , position:"absolute"}} handle={() => copyUrl(gif.url)}  objs={<Url color={copy ? "green" : "white"} />} />
 
     </div>
   );
