@@ -11,24 +11,31 @@ import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentSt
 const StyledBox = styled.div`
   display: flex;
   @media (max-width:768px){
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
 `;
-const Gifs = styled.div`
+
+interface IGifs {
+  screen: boolean
+}
+const Gifs = styled.div<IGifs>`
   width: 800px;
   margin: 20px 0 0 230px;
   @media (max-width:767px) {
     margin: 0;
+  width: auto;
+height: ${({ screen }) => screen ? "auto" : "100vh"};
     padding: 20px;
   }
 `
 const Home: FC = () => {
-  const newData:IStateData = useFetch({ method: "trending" });
+  const newData: IStateData = useFetch({ method: "trending" });
   return (
     <StyledBox>
       <NavMenu />
-      <Gifs>
+      <Gifs screen={newData?.data?.length > 0 ? true : false}>
         {newData.mount ? (
           <>
             {newData.result && <h2>Today in #{newData.result}</h2>}

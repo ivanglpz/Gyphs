@@ -20,6 +20,7 @@ const ButtonTag = styled.button<IButtonTag>`
   padding: 5px;
   border-radius: 10px;
   color: white;
+  cursor: pointer;
   &:hover {
     background-color: ${({ bgColor }) => `rgba(${bgColor},0.5)`};
   }

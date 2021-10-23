@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const StyleGifsContent = styled.div`
   /* display: grid; */
+  height: 100wh;
   column-count: 3;
   column-gap: 1rem;
   @media (min-width:610px) and (max-width:768px){

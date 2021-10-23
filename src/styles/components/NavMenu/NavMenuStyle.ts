@@ -44,8 +44,16 @@ export const MenuOpts = styled.div`
 export const MenuMobile = styled.div`
 display: none;
   @media(max-width:768px){
-    margin: 20px 0 0 0;
-    display: block;
-    padding: 0 0 0 17px;
+    /* margin: 20px 0 0 0; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    /* width: 100%; */
+    position: sticky;
+    bottom: 0;
+    z-index:999;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 `

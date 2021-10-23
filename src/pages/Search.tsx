@@ -16,27 +16,32 @@ export interface IFetch {
 export const StyledApp = styled.main`
   display: flex;
   @media (max-width:768px) {
-    display: block;
-
+  flex-direction: column-reverse;
   }
 `;
 
-const Gifs = styled.div`
+interface IGifs {
+  screen: boolean
+}
+
+const Gifs = styled.div<IGifs>`
   padding: 40px;
   margin: 0 0 0 210px;
   width: 100%;
   @media(max-width:767px){
     padding: 20px;
+  width: auto;
+  height: ${({ screen }) => screen ? "100vh" : "auto"};
     margin: 0px;
     display: flex;
     flex-direction:column;
     align-items: center;
   }
 `;
-const tags = ["Red Velvet","Queendom", "Maroon 5", "Elton John", "John Legend", "Master Chief"];
+const tags = ["Red Velvet", "Whil", "Maroon 5", "Morgan",];
 
 const Search: FC = () => {
-  const [dataInfo, setData] = useState<IStateData>({} as IStateData);
+  const [dataInfo, setData] = useState<IStateData>({ mount: false } as IStateData);
   const [search, setSearch] = useState<string>("");
 
   const useFetch = async ({ method, search }: IParams): Promise<void> => {
@@ -97,24 +102,26 @@ const Search: FC = () => {
       setData({ ...dataInfo, mount: false });
     }
   };
+  console.log(dataInfo);
+
   return (
     <StyledApp>
       <NavMenu />
-      <Gifs>
-        <nav>
-          <SearchBar
-            search={search}
-            handleSubmit={handleSubmit}
-            setSearch={setSearch}
-          />
-        </nav>
-        <div>
-          #Tags
-          <div style={{display:"flex","alignItems":"center","flexWrap":"wrap",justifyContent:"flex-start"}}>
+      <Gifs screen={dataInfo?.mount === false ? true : false}>
+        <div style={{display:"flex", flexDirection:"column", justifyContent:"flex-start"}}>
+          <nav>
+            <SearchBar
+              search={search}
+              handleSubmit={handleSubmit}
+              setSearch={setSearch}
+            />
+          </nav>
+          <div style={{ display: "flex", "alignItems": "center", "flexWrap": "wrap", justifyContent: "flex-start" }}>
             {tags.map((tag) => (
-                <Tags position={false} key={tag} objs={tag} handleTags={()=>handleTags(tag)} />
-              ))}
+              <Tags position={false} key={tag} objs={tag} handleTags={() => handleTags(tag)} />
+            ))}
           </div>
+
         </div>
         {dataInfo.mount ? (
           <>

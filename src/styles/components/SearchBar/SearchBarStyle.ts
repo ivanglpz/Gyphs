@@ -28,15 +28,6 @@ export const FormButtonSearch = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover {
-    border-radius: 0 10px 10px 0;
-    svg {
-      path {
-        fill: white;
-      }
-    }
-    background-color: ${colors.capri};
-  }
 `;
 export const FormButtonTextDelete = styled.button`
   display: flex;
@@ -44,15 +35,7 @@ export const FormButtonTextDelete = styled.button`
   justify-content: center;
   border: none;
   background-color: transparent;
-
+  cursor: pointer;
   border-radius: 10px;
-  &:hover {
-    svg {
-      path {
-        fill: white;
-      }
-    }
-    background-color: ${colors.red};
-    /* background-color: ${colors.red}; */
-  }
+
 `;
