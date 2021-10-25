@@ -20,8 +20,8 @@ const ButtonTag = styled.button<IButtonTag>`
   border: none;
   position: ${({ props }) => props.position};
   margin: ${({ props }) => props.margin};
-  background-color: ${({ props }) => `rgb(${props.bgColor})`};
-  padding: 5px;
+  background-color: ${({ props }) => props.bgColor};
+  padding: 8px;
   border-radius: 10px;
   color: white;
   cursor: pointer;
@@ -33,33 +33,27 @@ const ButtonTag = styled.button<IButtonTag>`
   &:hover {
     svg {
       path {
-        fill: ${({ props }) => `rgb(${props.bgColor})`};
+        fill: ${({ props }) => props.bgColor};
       }
     }
-    color: ${({ props }) => `rgb(${props.bgColor})`};
+    color: ${({ props }) => props.bgColor};
 
     background-color: #f8f8f8;
   }
-  &:active {
-    svg {
-      path {
-        fill: white;
-      }
-    }
-    color: white;
-
-    background-color: ${({ props }) => `rgb(${props.bgColor})`};
-  }
 `;
 const colorsTags: string[] = [
-  "129, 214, 227",
-  "227, 208, 129",
-  "13, 50, 77",
-  "100, 44, 169",
-  "129, 244, 153",
-  "65, 66, 136",
-  "255, 54, 171",
-  "255, 16, 31",
+  "#ff6b35",
+  "#004e89",
+  "#f9dc5c",
+  "#0ad3ff",
+  "#0ead69",
+  "#dc136c",
+  "#8f3985",
+  "#8b80f9",
+  "#9be564",
+  "#2660a4",
+  "#59c9a5",
+  "#43281c"
 ];
 
 const Tags: FC<Props> = ({ handle, objs, props }) => {

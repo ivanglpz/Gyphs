@@ -3,18 +3,18 @@ import { colors } from "../../colors";
 
 export const StyledForm = styled.form`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 348px;
-
-  height: 31px;
-  background: ${colors.gray};
-  border-radius: 10px;
+  width: 315px;
+  height: 45px;
+  border: 1px solid rgba(65, 65, 65, 0.5);
+  box-sizing: border-box;
+  border-radius: 5px;
   input {
-    height: 31px;
+    height: 41px;
+    width: auto;
     border: none;
     background-color: transparent;
-    padding: 0 0 0 5px;
+    margin: 0 0 0 5px;
   }
   @media (max-width: 767px) {
     width: auto;

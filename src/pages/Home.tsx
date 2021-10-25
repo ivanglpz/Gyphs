@@ -17,7 +17,7 @@ const StyledBox = styled.div`
 `;
 
 interface IGifs {
-  screen: boolean;
+  screen: string;
 }
 const Gifs = styled.div<IGifs>`
   width: 800px;
@@ -25,7 +25,7 @@ const Gifs = styled.div<IGifs>`
   @media (max-width: 767px) {
     margin: 0;
     width: auto;
-    height: ${({ screen }) => (screen ? "auto" : "100vh")};
+    height: ${({ screen }) => screen};
     padding: 20px;
   }
 `;
@@ -34,10 +34,10 @@ const Home: FC = () => {
   return (
     <StyledBox>
       <NavMenu />
-      <Gifs screen={newData?.data?.length > 0 ? true : false}>
+      <Gifs screen={newData?.mount === false ? "none" : "100vh"}>
         {newData.mount ? (
           <>
-            {newData.result && <h2>Today in #{newData.result}</h2>}
+            {newData.result && <h2 style={{ width: "130px", color: colors.blackRaisin }}>Today in #{newData.result}</h2>}
             <StyleGifsContent>
               <GifsContent data={newData.data} />
             </StyleGifsContent>
@@ -51,7 +51,7 @@ const Home: FC = () => {
           />
         )}
       </Gifs>
-    </StyledBox>
+    </StyledBox >
   );
 };
 

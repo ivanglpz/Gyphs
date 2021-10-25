@@ -48,6 +48,7 @@ export const MenuMobile = styled.div`
     align-items: center;
     justify-content: space-around;
     padding: 20px;
+    height: 30px;
     /* width: 100%; */
     position: sticky;
     bottom: 0;

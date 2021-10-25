@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 import { FC, useEffect, useState } from "react";
-import Tags from "../Tags/Tags";
-import Url from "../Svg/Url";
 import Image from "next/image";
 
 interface IGifData {
@@ -25,46 +23,27 @@ interface IGifData {
       description?: string;
     };
   };
-  // load: boolean
-  imgload?: any;
 }
 
-const GifImg = styled.img`
-  background-color: #eee;
-  display: inline-block;
-  width: 100%;
+
+const GifImg = styled(Image)`
+  background-color: #e0e0e0;
   border-radius: 10px;
 `;
 
-const Gif: FC<IGifData> = ({ gif, imgload }) => {
-  const [copy, setCopy] = useState<boolean>(false);
+const Gif: FC<IGifData> = ({ gif }) => {
 
-  const copyUrl = (url: string) => {
-    navigator.clipboard.writeText(url);
-    setCopy(true);
-  };
-  useEffect(() => {
-    if (copy) {
-      setTimeout(() => {
-        setCopy(false);
-      }, 900);
-    }
-  }, [copy]);
   return (
-    <div style={{ display: "flex" }}>
-      <GifImg
-        loading="lazy"
-        src={gif.images.fixed_height.url}
-        alt={gif.title}
-        onLoad={imgload}
-      />
 
-      <Tags
-        props={{ margin: "10px", position: "absolute" }}
-        handle={() => copyUrl(gif.url)}
-        objs={<Url color={copy ? "green" : "white"} />}
-      />
-    </div>
+    <GifImg
+      loading="lazy"
+      loader={({ width }) => `${gif.images.fixed_height.url}?w=${width}&q=${75}`}
+      src={gif.images.fixed_height.url}
+      alt={gif.title}
+      width={Number(gif.images.fixed_height.width)}
+      height={Number(gif.images.fixed_height.height)}
+    />
+
   );
 };
 
