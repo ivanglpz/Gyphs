@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import Loading from "../components/Svg/Loading";
@@ -30,16 +30,20 @@ const Gifs = styled.div<IGifs>`
   }
 `;
 const Home: FC = () => {
-  const newData: IStateData = useFetch({ method: "trending" });
+  const [state, setstate] = useState<IStateData>({} as IStateData)
+  useEffect(() => {
+    useFetch({ method: "trending" })
+      .then((data: IStateData) => setstate(data))
+  }, [])
   return (
     <StyledBox>
       <NavMenu />
-      <Gifs screen={newData?.mount === false ? "none" : "100vh"}>
-        {newData.mount ? (
+      <Gifs screen={state?.mount === true ? "none" : "100vh"}>
+        {state.mount ? (
           <>
-            {newData.result && <h2 style={{ width: "130px", color: colors.blackRaisin }}>Today in #{newData.result}</h2>}
+            {state.result && <h2 style={{ width: "130px", color: colors.blackRaisin }}>Today in #{state.result}</h2>}
             <StyleGifsContent>
-              <GifsContent data={newData.data} />
+              <GifsContent data={state.data} />
             </StyleGifsContent>
           </>
         ) : (

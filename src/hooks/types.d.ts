@@ -26,6 +26,6 @@ export interface IParams {
 
 export type IStateData = {
   data: IData[];
-  result: string;
+  result?: string;
   mount: boolean;
 };
