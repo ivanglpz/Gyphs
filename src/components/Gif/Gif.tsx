@@ -25,25 +25,23 @@ interface IGifData {
   };
 }
 
-
 const GifImg = styled(Image)`
   background-color: #e0e0e0;
   border-radius: 10px;
 `;
 
 const Gif: FC<IGifData> = ({ gif }) => {
-
   return (
-
     <GifImg
       loading="lazy"
-      loader={({ width }) => `${gif.images.fixed_height.url}?w=${width}&q=${75}`}
+      loader={({ width }) =>
+        `${gif.images.fixed_height.url}?w=${width}&q=${75}`
+      }
       src={gif.images.fixed_height.url}
       alt={gif.title}
       width={Number(gif.images.fixed_height.width)}
       height={Number(gif.images.fixed_height.height)}
     />
-
   );
 };
 

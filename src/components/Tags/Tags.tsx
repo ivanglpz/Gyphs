@@ -53,7 +53,7 @@ const colorsTags: string[] = [
   "#9be564",
   "#2660a4",
   "#59c9a5",
-  "#43281c"
+  "#43281c",
 ];
 
 const Tags: FC<Props> = ({ handle, objs, props }) => {

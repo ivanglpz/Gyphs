@@ -30,18 +30,21 @@ const Gifs = styled.div<IGifs>`
   }
 `;
 const Home: FC = () => {
-  const [state, setstate] = useState<IStateData>({} as IStateData)
+  const [state, setstate] = useState<IStateData>({} as IStateData);
   useEffect(() => {
-    useFetch({ method: "trending" })
-      .then((data: IStateData) => setstate(data))
-  }, [])
+    useFetch({ method: "trending" }).then((data: IStateData) => setstate(data));
+  }, []);
   return (
     <StyledBox>
       <NavMenu />
       <Gifs screen={state?.mount === true ? "none" : "100vh"}>
         {state.mount ? (
           <>
-            {state.result && <h2 style={{ width: "130px", color: colors.blackRaisin }}>Today in #{state.result}</h2>}
+            {state.result && (
+              <h2 style={{ width: "130px", color: colors.blackRaisin }}>
+                Today in #{state.result}
+              </h2>
+            )}
             <StyleGifsContent>
               <GifsContent data={state.data} />
             </StyleGifsContent>
@@ -55,7 +58,7 @@ const Home: FC = () => {
           />
         )}
       </Gifs>
-    </StyledBox >
+    </StyledBox>
   );
 };
 

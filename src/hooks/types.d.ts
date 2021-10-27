@@ -22,6 +22,7 @@ export interface IData {
 export interface IParams {
   method: string;
   search?: string;
+  limit?: string | number;
 }
 
 export type IStateData = {

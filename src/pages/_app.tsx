@@ -7,13 +7,13 @@ import "../styles/masonry.css";
 import { Materialize } from "../styles/Normalize";
 
 interface props {
-  say: string
+  say: string;
 }
 
-const MyContext = createContext<props>({} as props)
+const MyContext = createContext<props>({} as props);
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const [state, setstate] = useState("hola")
+  const [state, setstate] = useState("hola");
   return (
     <MyContext.Provider value={{ say: state }}>
       <Head>

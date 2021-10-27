@@ -46,45 +46,67 @@ const InitGif = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
-`
+`;
 const tags = ["Whil", "Red Velvet", "Morgan", "Halo"];
 interface PropsFetch {
-  method: string,
-  search?: string
+  method: string;
+  search?: string;
+  limit?: number | string;
+}
+interface FilterProps {
+  limit: string | number;
 }
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({
-    mount: false
+    mount: false,
   } as IStateData);
   const [search, setSearch] = useState<string>("");
-  const [state, setstate] = useState<PropsFetch>({} as PropsFetch)
+  const [state, setstate] = useState<PropsFetch>({} as PropsFetch);
+  const [filterOpts, setFilterOpts] = useState<FilterProps>({
+    limit: "none",
+  } as FilterProps);
 
   const handleTags = (tag: string): void => {
     setSearch(tag);
-    setstate({ method: "search", search: tag })
+    setstate({
+      ...state,
+      method: "search",
+      search: tag,
+      limit: filterOpts.limit,
+    });
     setData({ ...data, mount: false });
+  };
+  const handleOpts = (event: { target: { value: string | number } }) => {
+    if (event.target.value === "none") {
+      setFilterOpts({ limit: event.target.value });
+    } else {
+      setFilterOpts({ limit: Number(event.target.value) });
+    }
   };
 
   const handleSubmit = (event: { preventDefault: () => void }): void => {
     event.preventDefault();
     if (search) {
-      setstate({ method: "search", search: search })
+      setstate({
+        ...state,
+        method: "search",
+        search: search,
+        limit: filterOpts.limit,
+      });
       setData({ ...data, mount: false });
-
     } else {
-      setstate({ method: "trending" })
+      setstate({ method: "trending" });
       setData({ ...data, mount: false });
     }
   };
   useEffect(() => {
     if (state.method) {
-      useFetch(state)
-        .then((data) => setData(data))
+      useFetch(state).then((data) => setData(data));
     }
-  }, [state])
+  }, [state]);
   console.log(data);
 
   return (
@@ -98,13 +120,27 @@ const Search: FC = () => {
             justifyContent: "flex-start",
           }}
         >
-          <h2 style={{ width: "130px", color: colors.blackRaisin }}>Find your favorite gif</h2>
+          <h2 style={{ width: "130px", color: colors.blackRaisin }}>
+            Find your favorite gif
+          </h2>
           <nav>
             <SearchBar
               search={search}
               handleSubmit={handleSubmit}
               setSearch={setSearch}
             />
+            <select name="cars" id="selects" onChange={handleOpts}>
+              <option value="" disabled selected>
+                Filter
+              </option>
+              <option value="none">none</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+
+            </select>
           </nav>
           <div style={{ display: "flex", flexWrap: "wrap", margin: "10px 0" }}>
             {tags.map((tag) => (
@@ -117,24 +153,22 @@ const Search: FC = () => {
             ))}
           </div>
         </div>
-        {
-          data.mount && (
-            <>
-              <StyleGifsContent>
-                <GifsContent data={data.data} />
-              </StyleGifsContent>
-            </>
-          )}
-        {data?.data?.length > 0 ? (
+        {data.mount && (
+          <>
+            <StyleGifsContent>
+              <GifsContent data={data.data} />
+            </StyleGifsContent>
+          </>
+        )}
+        {typeof data?.data?.length !== "undefined" && data.mount === false && (
           <Loading
             color={{
               colorPrimary: colors.capri,
               colorSecondary: colors.blueBlizzard,
             }}
           />
-
-
-        ) : (
+        )}
+        {typeof data?.data?.length === "undefined" && data.mount === false && (
           <InitGif>
             <svg
               width="80"
@@ -160,16 +194,11 @@ const Search: FC = () => {
                 </clipPath>
               </defs>
             </svg>
-            <p>
-              Search your favorite gif
-
-            </p>
-
+            <p>Search your favorite gif</p>
           </InitGif>
         )}
-
       </Gifs>
-    </StyledApp >
+    </StyledApp>
   );
 };
 

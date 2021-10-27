@@ -1,9 +1,10 @@
 import { IData, IParams, IStateData } from "./types";
 
-const useFetch = async ({ method, search }: IParams) => {
+const useFetch = async ({ method, search, limit }: IParams) => {
   const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${
     process.env.NEXT_PUBLIC_API_KEY
-  }${search ? `&q=${search}` : ""}`;
+  }${limit === "none" ? "" : `&limit=${limit}`}${search ? `&q=${search}` : ""}`;
+  console.log(url);
 
   const resp = await fetch(url);
   const { data }: IStateData = await resp.json();
