@@ -4,23 +4,13 @@ import Image from "next/image";
 
 interface IGifData {
   gif: {
-    id: string;
     title: string;
-    trending_datetime: string;
     images: {
       fixed_height: {
         url: string;
         width: string | number;
         height: string | number;
       };
-    };
-    url: string;
-    user?: {
-      avatar_url?: string;
-      display_name?: string;
-      username?: string;
-      profile_url?: string;
-      description?: string;
     };
   };
 }

@@ -1,21 +1,8 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-
-type IGifData = {
-  id: string | number;
-  title: string;
-  trending_datetime: string;
-  images: {
-    fixed_height: {
-      url: string;
-      width: string | number;
-    };
-  };
-  url: string;
-};
+import { IDetailGif } from "../pages/Search";
 
 interface IContext {
-  setSavedGif: Dispatch<SetStateAction<IGifData[]>>;
-  savedGif: IGifData[];
+  setDetailGif: Dispatch<SetStateAction<IDetailGif>>;
 }
 
 const UserContext = createContext<IContext>({} as IContext);

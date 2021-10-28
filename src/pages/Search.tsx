@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
 import { FC, useEffect, useState } from "react";
+import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
 import Loading from "../components/Svg/Loading";
 import Tags from "../components/Tags/Tags";
-import { IStateData } from "../hooks/types";
+import { IData, IStateData } from "../hooks/types";
+import UserContext from "../hooks/useContext";
 import useFetch from "../hooks/useFetch";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
@@ -14,9 +16,12 @@ export interface IFetch {
   method: string;
   search?: string;
 }
-
-export const StyledApp = styled.main`
+interface IApp {
+  details: string
+}
+export const StyledApp = styled.main<IApp>`
   display: flex;
+  position: ${({ details }) => details};
   @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
@@ -58,6 +63,10 @@ interface PropsFetch {
 interface FilterProps {
   limit: string | number;
 }
+export interface IDetailGif {
+  mount: boolean;
+  props: any;
+}
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({
@@ -68,6 +77,7 @@ const Search: FC = () => {
   const [filterOpts, setFilterOpts] = useState<FilterProps>({
     limit: "none",
   } as FilterProps);
+  const [detailGif, setDetailGif] = useState<IDetailGif>({} as IDetailGif);
 
   const handleTags = (tag: string): void => {
     setSearch(tag);
@@ -110,95 +120,102 @@ const Search: FC = () => {
   console.log(data);
 
   return (
-    <StyledApp>
-      <NavMenu />
-      <Gifs screen={data?.mount === true ? "none" : "100vh"}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-          }}
-        >
-          <h2 style={{ width: "130px", color: colors.blackRaisin }}>
-            Find your favorite gif
-          </h2>
-          <nav>
-            <SearchBar
-              search={search}
-              handleSubmit={handleSubmit}
-              setSearch={setSearch}
-            />
-            <select name="cars" id="selects" onChange={handleOpts}>
-              <option value="" disabled selected>
-                Filter
-              </option>
-              <option value="none">none</option>
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="50">50</option>
-
-            </select>
-          </nav>
-          <div style={{ display: "flex", flexWrap: "wrap", margin: "10px 0" }}>
-            {tags.map((tag) => (
-              <Tags
-                props={{ margin: "0 10px 0 0", position: "none" }}
-                key={tag}
-                objs={tag}
-                handle={() => handleTags(tag)}
-              />
-            ))}
-          </div>
-        </div>
-        {data.mount && (
-          <>
-            <StyleGifsContent>
-              <GifsContent data={data.data} />
-            </StyleGifsContent>
-          </>
-        )}
-        {typeof data?.data?.length !== "undefined" && data.mount === false && (
-          <Loading
-            color={{
-              colorPrimary: colors.capri,
-              colorSecondary: colors.blueBlizzard,
+    <UserContext.Provider value={{ setDetailGif }}>
+      {detailGif.mount && (
+        <GifDetail setDetailGif={setDetailGif} props={detailGif.props} />
+      )}
+      <StyledApp details={detailGif.mount ? "fixed" : "none"}>
+        <NavMenu />
+        <Gifs screen={data?.mount === true ? "none" : "100vh"}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
             }}
-          />
-        )}
-        {typeof data?.data?.length === "undefined" && data.mount === false && (
-          <InitGif>
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 37 37"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          >
+            <h2 style={{ width: "130px", color: colors.blackRaisin }}>
+              Find your favorite gif
+            </h2>
+            <nav>
+              <SearchBar
+                search={search}
+                handleSubmit={handleSubmit}
+                setSearch={setSearch}
+              />
+              <select name="cars" id="selects" onChange={handleOpts}>
+                <option value="" disabled selected>
+                  Filter
+                </option>
+                <option value="none">none</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </nav>
+            <div
+              style={{ display: "flex", flexWrap: "wrap", margin: "10px 0" }}
             >
-              <g clipPath="url(#clip0)">
-                <path
-                  d="M2.04224 16.3425L20.427 34.7273L34.7273 20.427L22.981 8.68069V12.7682L30.6413 20.4286L20.4285 30.6413L6.12979 16.3425L9.70409 12.7682L9.70256 8.68222L2.04224 16.3425ZM10.2143 8.17051L16.3425 14.2988L22.4708 8.17051L20.4285 6.12827L18.3848 8.17204L16.3425 6.1298L14.3003 8.17204L12.2565 6.12827"
-                  fill={`${colors.blackRaisin}`}
+              {tags.map((tag) => (
+                <Tags
+                  props={{ margin: "0 10px 0 0", position: "none" }}
+                  key={tag}
+                  objs={tag}
+                  handle={() => handleTags(tag)}
                 />
-              </g>
-              <defs>
-                <clipPath id="clip0">
-                  <rect
-                    width="26"
-                    height="26"
-                    fill="white"
-                    transform="translate(0 18.3848) rotate(-45)"
+              ))}
+            </div>
+          </div>
+          {data.mount && (
+            <>
+              <StyleGifsContent>
+                <GifsContent data={data.data} />
+              </StyleGifsContent>
+            </>
+          )}
+          {typeof data?.data?.length !== "undefined" && data.mount === false && (
+            <Loading
+              color={{
+                colorPrimary: colors.capri,
+                colorSecondary: colors.blueBlizzard,
+              }}
+            />
+          )}
+          {typeof data?.data?.length === "undefined" && data.mount === false && (
+            <InitGif>
+              <svg
+                width="80"
+                height="80"
+                viewBox="0 0 37 37"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0)">
+                  <path
+                    d="M2.04224 16.3425L20.427 34.7273L34.7273 20.427L22.981 8.68069V12.7682L30.6413 20.4286L20.4285 30.6413L6.12979 16.3425L9.70409 12.7682L9.70256 8.68222L2.04224 16.3425ZM10.2143 8.17051L16.3425 14.2988L22.4708 8.17051L20.4285 6.12827L18.3848 8.17204L16.3425 6.1298L14.3003 8.17204L12.2565 6.12827"
+                    fill={`${colors.blackRaisin}`}
                   />
-                </clipPath>
-              </defs>
-            </svg>
-            <p>Search your favorite gif</p>
-          </InitGif>
-        )}
-      </Gifs>
-    </StyledApp>
+                </g>
+                <defs>
+                  <clipPath id="clip0">
+                    <rect
+                      width="26"
+                      height="26"
+                      fill="white"
+                      transform="translate(0 18.3848) rotate(-45)"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+              <p>Search your favorite gif</p>
+            </InitGif>
+          )}
+        </Gifs>
+      </StyledApp>
+
+    </UserContext.Provider>
   );
 };
 

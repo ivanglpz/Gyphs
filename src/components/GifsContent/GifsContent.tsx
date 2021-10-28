@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import Gif from "../Gif/Gif";
 import styled from "@emotion/styled";
 import { IData } from "../../hooks/types";
+import UserContext from "../../hooks/useContext";
 
 type IStateData = {
   data: IData[];
@@ -13,11 +14,17 @@ const GifBox = styled.div`
   width: 100%;
 `;
 const GifsContent: FC<IStateData> = ({ data }) => {
+  const { setDetailGif } = useContext(UserContext);
+  // console.log(setDetailGif);
+
   return (
     <>
       {data?.map((gif) => (
         <GifBox key={gif.id}>
-          <Gif gif={gif} />
+          <button style={{ border: "none", cursor: "pointer", background: "transparent" }} onClick={() => setDetailGif({ mount: true, props: gif })}>
+            <Gif gif={gif} />
+
+          </button>
         </GifBox>
       ))}
     </>

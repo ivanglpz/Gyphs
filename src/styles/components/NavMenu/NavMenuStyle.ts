@@ -7,7 +7,7 @@ export const StyledMenu = styled.nav`
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 10px;
-  z-index: 9;
+  z-index: 0;
   position: fixed;
   /* display: block; */
   @media (max-width: 767px) {
