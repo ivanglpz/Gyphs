@@ -1,6 +1,7 @@
 interface IColors {
   blue: string;
   gray: string;
+  newBlue: string;
   black: string;
   capri: string;
   blackRaisin: string;
@@ -12,6 +13,7 @@ interface IColors {
 
 export const colors: IColors = {
   blue: "#30c5ff",
+  newBlue: "#3246D3",
   gray: "#F3F3F3",
   black: "#2C2C2C",
   capri: "#30C5FF",

@@ -1,13 +1,12 @@
-interface IData {
-  id: string;
+////Search=>Pages
+export interface IDataGif {
+  mount: boolean;
+  props: any;
+}
+
+export interface IAbout {
+  id: number;
   title: string;
-  treding_datetime: string;
-  images: {
-    fixed_height: {
-      url: string;
-      width: string | number;
-      height: string | number;
-    };
-  };
+  text: string;
   url: string;
 }

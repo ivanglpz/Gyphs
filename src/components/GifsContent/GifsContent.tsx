@@ -21,9 +21,15 @@ const GifsContent: FC<IStateData> = ({ data }) => {
     <>
       {data?.map((gif) => (
         <GifBox key={gif.id}>
-          <button style={{ border: "none", cursor: "pointer", background: "transparent" }} onClick={() => setDetailGif({ mount: true, props: gif })}>
+          <button
+            style={{
+              border: "none",
+              cursor: "pointer",
+              background: "transparent",
+            }}
+            onClick={() => setDetailGif({ mount: true, props: gif })}
+          >
             <Gif gif={gif} />
-
           </button>
         </GifBox>
       ))}

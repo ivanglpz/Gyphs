@@ -1,44 +1,36 @@
 import styled from "@emotion/styled";
+import Head from "next/head";
 import { FC, useEffect, useState } from "react";
+import tags from "../assets/tags.json";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
 import Loading from "../components/Svg/Loading";
 import Tags from "../components/Tags/Tags";
-import { IData, IStateData } from "../hooks/types";
+import { IParams, IStateData } from "../hooks/types";
 import UserContext from "../hooks/useContext";
 import useFetch from "../hooks/useFetch";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
+import { IDataGif } from "../types/types";
 
-export interface IFetch {
-  method: string;
-  search?: string;
-}
-interface IApp {
-  details: string
-}
-export const StyledApp = styled.main<IApp>`
+export const StyledApp = styled.main`
   display: flex;
-  position: ${({ details }) => details};
+  position: ${({ details }: { details: string }) => details};
   @media (max-width: 768px) {
     flex-direction: column-reverse;
   }
 `;
 
-interface IGifs {
-  screen: string;
-}
-
-const Gifs = styled.div<IGifs>`
+const Gifs = styled.div`
   padding: 40px;
   margin: 0 0 0 210px;
   width: 100%;
   @media (max-width: 767px) {
     padding: 20px;
     width: auto;
-    height: ${({ screen }) => screen};
+    height: ${({ screen }: { screen: string }) => screen};
     margin: 0px;
     display: flex;
     flex-direction: column;
@@ -54,73 +46,61 @@ const InitGif = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const tags = ["Whil", "Red Velvet", "Morgan", "Halo"];
-interface PropsFetch {
-  method: string;
-  search?: string;
-  limit?: number | string;
-}
-interface FilterProps {
-  limit: string | number;
-}
-export interface IDetailGif {
-  mount: boolean;
-  props: any;
-}
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({
     mount: false,
   } as IStateData);
   const [search, setSearch] = useState<string>("");
-  const [state, setstate] = useState<PropsFetch>({} as PropsFetch);
-  const [filterOpts, setFilterOpts] = useState<FilterProps>({
-    limit: "none",
-  } as FilterProps);
-  const [detailGif, setDetailGif] = useState<IDetailGif>({} as IDetailGif);
+  const [form, setForm] = useState<IParams>({} as IParams);
+  const [filterNumber, setFilterNumber] = useState<string | number>("none");
+  const [detailGif, setDetailGif] = useState<IDataGif>({} as IDataGif);
 
   const handleTags = (tag: string): void => {
     setSearch(tag);
-    setstate({
-      ...state,
+    setForm({
+      ...form,
       method: "search",
       search: tag,
-      limit: filterOpts.limit,
+      limit: filterNumber,
     });
     setData({ ...data, mount: false });
   };
   const handleOpts = (event: { target: { value: string | number } }) => {
     if (event.target.value === "none") {
-      setFilterOpts({ limit: event.target.value });
+      setFilterNumber(event.target.value);
     } else {
-      setFilterOpts({ limit: Number(event.target.value) });
+      setFilterNumber(Number(event.target.value));
     }
   };
 
   const handleSubmit = (event: { preventDefault: () => void }): void => {
     event.preventDefault();
     if (search) {
-      setstate({
-        ...state,
+      setForm({
+        ...form,
         method: "search",
         search: search,
-        limit: filterOpts.limit,
+        limit: filterNumber,
       });
       setData({ ...data, mount: false });
     } else {
-      setstate({ method: "trending" });
+      setForm({ method: "trending" });
       setData({ ...data, mount: false });
     }
   };
   useEffect(() => {
-    if (state.method) {
-      useFetch(state).then((data) => setData(data));
+    if (form.method) {
+      useFetch(form).then((data) => setData(data));
     }
-  }, [state]);
+  }, [form]);
   console.log(data);
 
   return (
     <UserContext.Provider value={{ setDetailGif }}>
+      <Head>
+        <title>Gyphs | Search</title>
+      </Head>
       {detailGif.mount && (
         <GifDetail setDetailGif={setDetailGif} props={detailGif.props} />
       )}
@@ -214,7 +194,6 @@ const Search: FC = () => {
           )}
         </Gifs>
       </StyledApp>
-
     </UserContext.Provider>
   );
 };
