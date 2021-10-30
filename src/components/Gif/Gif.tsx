@@ -25,7 +25,7 @@ const Gif: FC<IGifData> = ({ gif }) => {
     <GifImg
       loading="lazy"
       loader={({ width }) =>
-        `${gif.images.fixed_height.url}?w=${width}&q=${75}`
+        `${gif.images.fixed_height.url}?w=${width}&q=${25}`
       }
       src={gif.images.fixed_height.url}
       alt={gif.title}

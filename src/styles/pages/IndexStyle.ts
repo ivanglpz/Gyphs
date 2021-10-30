@@ -45,7 +45,6 @@ export const ButtonLink = styled.a`
   }
 `;
 export const HomeSlider = styled.div`
-  /* width: 500px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +52,7 @@ export const HomeSlider = styled.div`
   border-radius: 5px;
 `;
 export const HomeSwiper = styled(Swiper)`
-  width: 500px;
+  width: 600px;
   @media (max-width: 540px) {
     width: 350px;
   }
