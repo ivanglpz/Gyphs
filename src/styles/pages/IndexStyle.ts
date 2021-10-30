@@ -7,19 +7,19 @@ export const NavStyle = styled.nav`
   align-items: center;
   padding: 25px;
   h1 {
-    color: ${colors.blackRaisin};
+    /* color: ${colors.blackRaisin}; */
     font-size: 24px;
   }
 `;
 export const Home = styled.div`
   h2 {
-    color: ${colors.blackRaisin};
+    /* color: ${colors.blackRaisin}; */
     width: 330px;
     font-size: 36px;
   }
   p {
     font-size: 18px;
-    color: ${colors.blackRaisin};
+    /* color: ${colors.blackRaisin}; */
     width: 271px;
   }
   @media (max-width: 765px) {
@@ -31,17 +31,17 @@ export const Home = styled.div`
 `;
 
 export const ButtonLink = styled.a`
-  background-color: ${colors.newBlue};
+  background-color: ${colors.blue};
   color: white;
   padding: 10px 15px;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
   &:hover {
-    outline: 1px solid ${colors.newBlue};
+    outline: 1px solid ${colors.blue};
     outline-offset: -2px;
-    background-color: white;
-    color: ${colors.newBlue};
+    background-color: transparent;
+    color: ${colors.blue};
   }
 `;
 export const HomeSlider = styled.div`
@@ -75,7 +75,7 @@ export const AboutBox = styled.div`
   padding: 35px;
 `;
 export const About = styled.div`
-  color: ${colors.blackRaisin};
+  /* color: ${colors.blackRaisin}; */
   h3 {
     font-size: 24px;
   }
@@ -89,7 +89,7 @@ export const About = styled.div`
 
 export const FooterBox = styled.footer`
   margin: 100px 0 0 0;
-  background-color: ${colors.blackRaisin};
+  /* background-color: ${colors.blackRaisin}; */
   color: white;
   width: 100%;
   height: 350px;

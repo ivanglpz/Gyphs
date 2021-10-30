@@ -10,7 +10,7 @@ import about from "../assets/information.json";
 import { IAbout } from "../types/types";
 import Image from "next/image";
 import Head from "next/head";
-import * as S from '../styles/pages/IndexStyle'
+import * as S from "../styles/pages/IndexStyle";
 
 interface Props { }
 
@@ -36,7 +36,7 @@ const index: FC = (props: Props) => {
           <g clipPath="url(#clip0)">
             <path
               d="M2.04224 16.3425L20.427 34.7273L34.7273 20.427L22.981 8.68069V12.7682L30.6413 20.4286L20.4285 30.6413L6.12979 16.3425L9.70409 12.7682L9.70256 8.68222L2.04224 16.3425ZM10.2143 8.17051L16.3425 14.2988L22.4708 8.17051L20.4285 6.12827L18.3848 8.17204L16.3425 6.1298L14.3003 8.17204L12.2565 6.12827"
-              fill={`${colors.newBlue}`}
+              fill={colors.blue}
             />
           </g>
           <defs>

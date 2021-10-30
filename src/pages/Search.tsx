@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import tags from "../assets/tags.json";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
@@ -11,6 +11,7 @@ import Tags from "../components/Tags/Tags";
 import { IParams, IStateData } from "../hooks/types";
 import UserContext from "../hooks/useContext";
 import useFetch from "../hooks/useFetch";
+import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import { IDataGif } from "../types/types";
@@ -55,6 +56,8 @@ const Search: FC = () => {
   const [form, setForm] = useState<IParams>({} as IParams);
   const [filterNumber, setFilterNumber] = useState<string | number>("none");
   const [detailGif, setDetailGif] = useState<IDataGif>({} as IDataGif);
+  const { theme } = useContext(MyContext);
+
 
   const handleTags = (tag: string): void => {
     setSearch(tag);
@@ -114,7 +117,7 @@ const Search: FC = () => {
               justifyContent: "flex-start",
             }}
           >
-            <h2 style={{ width: "130px", color: colors.blackRaisin }}>
+            <h2 style={{ width: "130px" }}>
               Find your favorite gif
             </h2>
             <nav>
@@ -175,7 +178,7 @@ const Search: FC = () => {
                 <g clipPath="url(#clip0)">
                   <path
                     d="M2.04224 16.3425L20.427 34.7273L34.7273 20.427L22.981 8.68069V12.7682L30.6413 20.4286L20.4285 30.6413L6.12979 16.3425L9.70409 12.7682L9.70256 8.68222L2.04224 16.3425ZM10.2143 8.17051L16.3425 14.2988L22.4708 8.17051L20.4285 6.12827L18.3848 8.17204L16.3425 6.1298L14.3003 8.17204L12.2565 6.12827"
-                    fill={`${colors.blackRaisin}`}
+                    fill={theme === "light" ? colors.blackRaisin : "white"}
                   />
                 </g>
                 <defs>

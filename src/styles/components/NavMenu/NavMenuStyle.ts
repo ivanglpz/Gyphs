@@ -4,7 +4,7 @@ import { colors } from "../../colors";
 export const StyledMenu = styled.nav`
   width: 190px;
   height: 100%;
-  background: #ffffff;
+  /* background: #ffffff; */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 10px;
   z-index: 0;
@@ -15,10 +15,12 @@ export const StyledMenu = styled.nav`
   }
 `;
 export const MenuNavBar = styled.div`
-  display: flex;
-  align-items: center;
+  a {
+    display: flex;
+    align-items: center;
+  }
   h1 {
-    color: ${colors.blackRaisin};
+    /* color: ${colors.blackRaisin}; */
   }
 `;
 export const MenuOpts = styled.div`
@@ -28,7 +30,8 @@ export const MenuOpts = styled.div`
       align-items: center;
       list-style: none;
       a {
-        color: ${colors.blackRaisin};
+        color: ${({ theme }) =>
+          theme === "light" ? colors.blackRaisin : "white"};
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -53,7 +56,8 @@ export const MenuMobile = styled.div`
     position: sticky;
     bottom: 0;
     z-index: 999;
-    background-color: white;
+    background-color: ${({ theme }) =>
+      theme === "light" ? "white" : colors.blackRaisin};
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 `;

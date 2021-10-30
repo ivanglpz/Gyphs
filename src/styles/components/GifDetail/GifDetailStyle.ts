@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colors } from "../../colors";
 
 export const MainDetails = styled.main`
   background-color: rgba(0, 0, 0, 0.5);
@@ -12,7 +13,8 @@ export const MainDetails = styled.main`
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background: white;
+  background: ${({ theme }) =>
+    theme === "light" ? "white" : colors.blackRaisin};
   width: 400px;
   padding: 20px;
   @media (max-width: 715px) {

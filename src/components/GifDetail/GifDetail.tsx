@@ -1,16 +1,20 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import Image from "next/image";
 import * as S from "../../styles/components/GifDetail/GifDetailStyle";
 import Gif from "../Gif/Gif";
 import socialMedia from "./data.json";
 import { IGifDetails } from "./types";
+import MyContext from "../../hooks/useTheme";
+import { colors } from "../../styles/colors";
 
 const handleCopy = (url: string) => navigator.clipboard.writeText(url);
 
 const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
+  const { theme } = useContext(MyContext);
+
   return (
     <S.MainDetails>
-      <S.Card>
+      <S.Card theme={theme}>
         <S.CardNav>
           <h2>Details</h2>
           <button
@@ -33,7 +37,7 @@ const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
             >
               <path
                 d="M14.5 15.75L24 25.5M5 25.5L14.5 15.75L5 25.5ZM24 6L14.4982 15.75L24 6ZM14.4982 15.75L5 6L14.4982 15.75Z"
-                stroke="black"
+                stroke={theme === "light" ? colors.blackRaisin : "white"}
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"

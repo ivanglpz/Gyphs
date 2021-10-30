@@ -13,7 +13,6 @@ const Loading: FC<Props> = ({ color }) => {
     <svg
       style={{
         margin: "auto",
-        background: "rgb(255, 255, 255)",
         display: "block",
         shapeRendering: "auto",
       }}
