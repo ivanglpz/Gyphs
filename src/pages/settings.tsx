@@ -18,15 +18,13 @@ const MainBody = styled.div`
   @media (max-width: 768px) {
     margin: 0;
     padding: 20px;
-
   }
 `;
-
 
 const Settings: FC = () => {
   const { theme, setTheme } = useContext(MyContext);
   return (
-    <MainApp >
+    <MainApp>
       <NavMenu />
       <MainBody>
         <h1>Settings</h1>

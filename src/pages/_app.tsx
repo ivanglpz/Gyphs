@@ -12,13 +12,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [theme, setTheme] = useState<string>("light");
 
   useLayoutEffect(() => {
-
-    setTheme(localStorage.getItem("@theme") || "light")
-  }, [])
+    setTheme(localStorage.getItem("@theme") || "light");
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("@theme", theme)
-  }, [theme])
+    localStorage.setItem("@theme", theme);
+  }, [theme]);
   return (
     <MyContext.Provider value={{ theme, setTheme }}>
       <Head>

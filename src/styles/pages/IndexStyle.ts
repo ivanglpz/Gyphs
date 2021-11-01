@@ -89,7 +89,7 @@ export const About = styled.div`
 
 export const FooterBox = styled.footer`
   margin: 100px 0 0 0;
-  /* background-color: ${colors.blackRaisin}; */
+  background-color: ${colors.blackRaisin};
   color: white;
   width: 100%;
   height: 350px;

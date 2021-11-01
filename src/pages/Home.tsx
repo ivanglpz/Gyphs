@@ -33,9 +33,7 @@ const Home: FC = () => {
           {state.mount ? (
             <>
               {state.result && (
-                <h2 style={{ width: "130px" }}>
-                  Today in #{state.result}
-                </h2>
+                <h2 style={{ width: "130px" }}>Today in #{state.result}</h2>
               )}
               <StyleGifsContent>
                 <GifsContent data={state.data} />

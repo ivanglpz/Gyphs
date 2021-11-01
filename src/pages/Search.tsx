@@ -58,7 +58,6 @@ const Search: FC = () => {
   const [detailGif, setDetailGif] = useState<IDataGif>({} as IDataGif);
   const { theme } = useContext(MyContext);
 
-
   const handleTags = (tag: string): void => {
     setSearch(tag);
     setForm({
@@ -117,9 +116,7 @@ const Search: FC = () => {
               justifyContent: "flex-start",
             }}
           >
-            <h2 style={{ width: "130px" }}>
-              Find your favorite gif
-            </h2>
+            <h2 style={{ width: "130px" }}>Find your favorite gif</h2>
             <nav>
               <SearchBar
                 search={search}
@@ -127,15 +124,11 @@ const Search: FC = () => {
                 setSearch={setSearch}
               />
               <select name="cars" id="selects" onChange={handleOpts}>
-                <option value="" disabled selected>
-                  Filter
-                </option>
-                <option value="none">none</option>
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
-                <option value="50">50</option>
+                <option value="50" selected>50</option>
               </select>
             </nav>
             <div
