@@ -49,7 +49,7 @@ const NavMenu: FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="/Settings">
+              <Link href="/settings">
                 <a>
                   <SettingsIcon
                     theme={theme}

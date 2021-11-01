@@ -20,22 +20,21 @@ const MainBody = styled.div`
     padding: 20px;
   }
 `;
-
 const Settings: FC = () => {
-  const { theme, setTheme } = useContext(MyContext);
-  return (
-    <MainApp>
-      <NavMenu />
-      <MainBody>
-        <h1>Settings</h1>
-        <div>
-          <h3>Theme</h3>
-          <ThemeForm props={{ label: "light", setTheme, theme }} />
-          <ThemeForm props={{ label: "dark", setTheme, theme }} />
-        </div>
-      </MainBody>
-    </MainApp>
-  );
+    const { theme, setTheme } = useContext(MyContext);
+    return (
+        <MainApp>
+            <NavMenu />
+            <MainBody>
+                <h1>Settings</h1>
+                <div>
+                    <h3>Theme</h3>
+                    <ThemeForm props={{ label: "light", setTheme, theme }} />
+                    <ThemeForm props={{ label: "dark", setTheme, theme }} />
+                </div>
+            </MainBody>
+        </MainApp>
+    );
 };
 
 export default Settings;
