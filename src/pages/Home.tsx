@@ -8,13 +8,13 @@ import UserContext from "../hooks/useContext";
 import useFetch from "../hooks/useFetch";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
-import { IDataGif } from "../types/types";
+import { IFormGif } from "../types/types";
 import * as S from "../styles/pages/HomeStyle";
 import Head from "next/head";
 
 const Home: FC = () => {
   const [state, setstate] = useState<IStateData>({} as IStateData);
-  const [detailGif, setDetailGif] = useState<IDataGif>({} as IDataGif);
+  const [detailGif, setDetailGif] = useState<IFormGif>({} as IFormGif);
 
   useEffect(() => {
     useFetch({ method: "trending" }).then((data) => setstate(data));
