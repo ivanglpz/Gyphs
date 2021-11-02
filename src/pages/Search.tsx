@@ -39,17 +39,19 @@ const Gifs = styled.div`
     padding: 20px;
     width: auto;
     height: ${({ screen }: IScreen) =>
-      (screen.mount === false && "100vh") ||
+    (screen.mount === false && "100vh") ||
       (screen.mount === false && screen.filter === 5)
-        ? "100vh"
-        : " none"};
+      ? "100vh"
+      : " none"};
     margin: 0px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 `;
-
+const NavSearchBar = styled.nav`
+  display: flex;
+`
 const InitGif = styled.div`
   width: 100%;
   height: 100vh;
@@ -121,14 +123,14 @@ const Search: FC = () => {
             }}
           >
             <h2 style={{ width: "130px" }}>Find your favorite gif</h2>
-            <nav>
+            <NavSearchBar>
               <SearchBar
                 search={search}
                 handleSubmit={handleSubmit}
                 setSearch={setSearch}
               />
-              <SelectNumberGifs setFilter={setFilter} />
-            </nav>
+              <SelectNumberGifs theme={theme} setFilter={setFilter} />
+            </NavSearchBar>
             <div
               style={{ display: "flex", flexWrap: "wrap", margin: "10px 0" }}
             >

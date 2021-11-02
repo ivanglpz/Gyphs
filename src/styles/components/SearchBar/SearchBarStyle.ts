@@ -6,8 +6,8 @@ export const StyledForm = styled.form`
   align-items: center;
   width: 315px;
   height: 45px;
-  border: 1px solid rgba(65, 65, 65, 0.5);
   box-sizing: border-box;
+  border: 1px solid rgba(65, 65, 65, 0.5);
   border-radius: 5px;
   input {
     height: 41px;
