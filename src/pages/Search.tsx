@@ -6,6 +6,7 @@ import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
+import SelectNumberGifs from "../components/SelectNumberGifs/SelectNumberGifs";
 import Loading from "../components/Svg/Loading";
 import Tags from "../components/Tags/Tags";
 import { IParams, IStateData } from "../hooks/types";
@@ -14,7 +15,7 @@ import useFetch from "../hooks/useFetch";
 import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
-import { IDataGif } from "../types/types";
+import { IFormGif } from "../types/types";
 
 export const StyledApp = styled.main`
   display: flex;
@@ -23,6 +24,12 @@ export const StyledApp = styled.main`
     flex-direction: column-reverse;
   }
 `;
+interface IScreen {
+  screen: {
+    mount: boolean;
+    filter: number;
+  };
+}
 
 const Gifs = styled.div`
   padding: 40px;
@@ -31,7 +38,11 @@ const Gifs = styled.div`
   @media (max-width: 767px) {
     padding: 20px;
     width: auto;
-    height: ${({ screen }: { screen: string }) => screen};
+    height: ${({ screen }: IScreen) =>
+      (screen.mount === false && "100vh") ||
+      (screen.mount === false && screen.filter === 5)
+        ? "100vh"
+        : " none"};
     margin: 0px;
     display: flex;
     flex-direction: column;
@@ -54,8 +65,8 @@ const Search: FC = () => {
   } as IStateData);
   const [search, setSearch] = useState<string>("");
   const [form, setForm] = useState<IParams>({} as IParams);
-  const [filterNumber, setFilterNumber] = useState<string | number>("none");
-  const [detailGif, setDetailGif] = useState<IDataGif>({} as IDataGif);
+  const [filter, setFilter] = useState<number>(50);
+  const [details, setDetails] = useState<IFormGif>({} as IFormGif);
   const { theme } = useContext(MyContext);
 
   const handleTags = (tag: string): void => {
@@ -64,16 +75,9 @@ const Search: FC = () => {
       ...form,
       method: "search",
       search: tag,
-      limit: filterNumber,
+      limit: filter,
     });
     setData({ ...data, mount: false });
-  };
-  const handleOpts = (event: { target: { value: string | number } }) => {
-    if (event.target.value === "none") {
-      setFilterNumber(event.target.value);
-    } else {
-      setFilterNumber(Number(event.target.value));
-    }
   };
 
   const handleSubmit = (event: { preventDefault: () => void }): void => {
@@ -83,7 +87,7 @@ const Search: FC = () => {
         ...form,
         method: "search",
         search: search,
-        limit: filterNumber,
+        limit: filter,
       });
       setData({ ...data, mount: false });
     } else {
@@ -99,16 +103,16 @@ const Search: FC = () => {
   console.log(data);
 
   return (
-    <UserContext.Provider value={{ setDetailGif }}>
+    <UserContext.Provider value={{ setDetailGif: setDetails }}>
       <Head>
         <title>Gyphs | Search</title>
       </Head>
-      {detailGif.mount && (
-        <GifDetail setDetailGif={setDetailGif} props={detailGif.props} />
+      {details.mount && (
+        <GifDetail setDetailGif={setDetails} props={details.props} />
       )}
-      <StyledApp details={detailGif.mount ? "fixed" : "none"}>
+      <StyledApp details={details.mount ? "fixed" : "none"}>
         <NavMenu />
-        <Gifs screen={data?.mount === true ? "none" : "100vh"}>
+        <Gifs screen={{ mount: data.mount, filter: filter }}>
           <div
             style={{
               display: "flex",
@@ -123,13 +127,7 @@ const Search: FC = () => {
                 handleSubmit={handleSubmit}
                 setSearch={setSearch}
               />
-              <select name="cars" id="selects" onChange={handleOpts}>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="50" selected>50</option>
-              </select>
+              <SelectNumberGifs setFilter={setFilter} />
             </nav>
             <div
               style={{ display: "flex", flexWrap: "wrap", margin: "10px 0" }}

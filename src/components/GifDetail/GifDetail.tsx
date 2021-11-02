@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useState } from "react";
 import Image from "next/image";
 import * as S from "../../styles/components/GifDetail/GifDetailStyle";
 import Gif from "../Gif/Gif";
@@ -7,11 +7,33 @@ import { IGifDetails } from "./types";
 import MyContext from "../../hooks/useTheme";
 import { colors } from "../../styles/colors";
 
-const handleCopy = (url: string) => navigator.clipboard.writeText(url);
+interface IAttribute {
+  name: string;
+  social: string;
+  url: string;
+  urlTitle: string;
+}
 
 const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
   const { theme } = useContext(MyContext);
 
+  const handleUrl = (props: IAttribute) => {
+    switch (props.name) {
+      case "whatsapp":
+        window.location.href = `${props.social}${props.urlTitle} ${props.url}`;
+        break;
+      case "twitter":
+        window.location.href = `${props.social}${props.url}&text=${props.urlTitle}`;
+        break;
+
+      case "facebook":
+        window.location.href = `${props.social}${props.url}`;
+        break;
+
+      default:
+        break;
+    }
+  };
   return (
     <S.MainDetails>
       <S.Card theme={theme}>
@@ -48,20 +70,22 @@ const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
         <div>
           <Gif gif={{ title: props.title, images: props.images }} />
           <div style={{ margin: "10px 0" }}>
-            {socialMedia.map((media) => (
+            {socialMedia.map((social) => (
               <button
-                onClick={() => handleCopy(props.url)}
-                style={{
-                  cursor: "pointer",
-                  border: "none",
-                  background: "none",
-                  margin: "0 10px 0 0",
-                }}
+                formTarget="blank"
+                onClick={() =>
+                  handleUrl({
+                    name: social.name,
+                    social: social.url,
+                    url: props.url,
+                    urlTitle: props.title
+                  })
+                }
               >
                 <Image
-                  key={media}
-                  src={`/socialMedia/${media}.svg`}
-                  alt={media}
+                  key={social.id}
+                  src={`/socialMedia/${social.name}.svg`}
+                  alt={social.name}
                   width={35}
                   height={35}
                 />

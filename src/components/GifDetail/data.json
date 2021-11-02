@@ -1,7 +1,17 @@
 [
-    "url",
-    "whatsapp",
-    "twitter",
-    "insta",
-    "facebook"
+    {
+        "id": 1,
+        "name": "whatsapp",
+        "url": "https://wa.me/?text="
+    },
+    {
+        "id": 2,
+        "name": "twitter",
+        "url": "https://twitter.com/share?url="
+    },
+    {
+        "id": 3,
+        "name": "facebook",
+        "url": "https://www.facebook.com/sharer.php?u="
+    }
 ]

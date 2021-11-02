@@ -1,5 +1,5 @@
 ////Search=>Pages
-export interface IDataGif {
+export interface IFormGif {
   mount: boolean;
   props: any;
 }
