@@ -1,8 +1,8 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 // import { IDetailGif } from "../pages/Search";
-import { IDataGif } from "../types/types";
+import { IFormGif } from "../types/types";
 interface IContext {
-  setDetailGif: Dispatch<SetStateAction<IDataGif>>;
+  setDetailGif: Dispatch<SetStateAction<IFormGif>>;
 }
 
 const UserContext = createContext<IContext>({} as IContext);
