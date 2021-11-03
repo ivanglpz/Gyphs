@@ -12,7 +12,7 @@ const SearchBar: FC<Props> = ({ search, handleSubmit, setSearch }) => {
   const { theme } = useContext(MyContext);
 
   return (
-    <S.StyledForm onSubmit={handleSubmit}>
+    <S.StyledForm onSubmit={handleSubmit} theme={theme}>
       <input
         type="text"
         placeholder="Search..."

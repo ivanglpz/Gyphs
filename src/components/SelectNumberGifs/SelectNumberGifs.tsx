@@ -2,20 +2,20 @@ import styled from "@emotion/styled";
 import { Dispatch, FC, SetStateAction } from "react";
 import { colors } from "../../styles/colors";
 
-
 interface IProps {
-  theme: string
+  theme: string;
   setFilter: Dispatch<SetStateAction<number>>;
 }
 
 const SelectStyle = styled.select`
-   background-color: red;
+  background-color: red;
   border: 1px solid rgba(65, 65, 65, 0.5);
   border-radius: 5px;
-  background-color: ${({ theme }: { theme: string }) => theme === "light" ? "white" : colors.blackRaisin};
-  color: ${({ theme }: { theme: string }) => theme === "light" ? "black" : "white"};
-
-`
+  background-color: ${({ theme }: { theme: string }) =>
+    theme === "light" ? "white" : colors.blackRaisin};
+  color: ${({ theme }: { theme: string }) =>
+    theme === "light" ? "black" : "white"};
+`;
 
 const SelectNumberGifs: FC<IProps> = (props) => {
   return (

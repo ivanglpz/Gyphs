@@ -15,7 +15,6 @@ const GifBox = styled.div`
 `;
 const GifsContent: FC<IStateData> = ({ data }) => {
   const { setDetailGif } = useContext(UserContext);
-  // console.log(setDetailGif);
 
   return (
     <>

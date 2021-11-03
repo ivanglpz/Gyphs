@@ -4,10 +4,9 @@ import { colors } from "../../colors";
 export const StyledForm = styled.form`
   display: flex;
   align-items: center;
-  width: 315px;
   height: 45px;
   box-sizing: border-box;
-  border: 1px solid rgba(65, 65, 65, 0.5);
+  border: 1px solid ${({ theme }) => (theme === "light" ? "#2C2C2C" : "white")};
   border-radius: 5px;
   input {
     height: 41px;

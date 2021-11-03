@@ -8,6 +8,7 @@ const useFetch = async ({ method, search, limit }: IParams) => {
 
   const resp = await fetch(url);
   const { data }: IStateData = await resp.json();
+  console.log(data);
 
   if (data.length > 0) {
     const newData = data.map((gif: IData): IData => {

@@ -78,7 +78,7 @@ const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
                     name: social.name,
                     social: social.url,
                     url: props.url,
-                    urlTitle: props.title
+                    urlTitle: props.title,
                   })
                 }
               >

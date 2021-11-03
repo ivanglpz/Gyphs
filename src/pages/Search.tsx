@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
 import tags from "../assets/tags.json";
+import CreateTags from "../components/CreateTags/CreateTags";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
 import NavMenu from "../components/NavMenu/NavMenu";
@@ -16,50 +17,9 @@ import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import { IFormGif } from "../types/types";
+import * as S from '../styles/pages/SearchStyle'
+import TagsIcon from "../components/Svg/ButtonSearchTags";
 
-export const StyledApp = styled.main`
-  display: flex;
-  position: ${({ details }: { details: string }) => details};
-  @media (max-width: 768px) {
-    flex-direction: column-reverse;
-  }
-`;
-interface IScreen {
-  screen: {
-    mount: boolean;
-    filter: number;
-  };
-}
-
-const Gifs = styled.div`
-  padding: 40px;
-  margin: 0 0 0 210px;
-  width: 100%;
-  @media (max-width: 767px) {
-    padding: 20px;
-    width: auto;
-    height: ${({ screen }: IScreen) =>
-    (screen.mount === false && "100vh") ||
-      (screen.mount === false && screen.filter === 5)
-      ? "100vh"
-      : " none"};
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-const NavSearchBar = styled.nav`
-  display: flex;
-`
-const InitGif = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({
@@ -69,7 +29,10 @@ const Search: FC = () => {
   const [form, setForm] = useState<IParams>({} as IParams);
   const [filter, setFilter] = useState<number>(50);
   const [details, setDetails] = useState<IFormGif>({} as IFormGif);
+  const [mountTags, setMountTags] = useState<boolean>(false);
+  const [tag, setTags] = useState<string[]>(tags);
   const { theme } = useContext(MyContext);
+  const [valueTag, setValueTag] = useState("");
 
   const handleTags = (tag: string): void => {
     setSearch(tag);
@@ -97,12 +60,21 @@ const Search: FC = () => {
       setData({ ...data, mount: false });
     }
   };
+  useLayoutEffect(() => {
+    const storage = JSON.parse(localStorage.getItem("@tags") || "[]")
+    setTags(storage?.length === 0 ? tags : storage);
+  }, []);
   useEffect(() => {
     if (form.method) {
       useFetch(form).then((data) => setData(data));
     }
   }, [form]);
-  console.log(data);
+  useEffect(() => {
+    if (tag) {
+      localStorage.setItem("@tags", JSON.stringify(tag));
+    }
+  }, [tag]);
+
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>
@@ -112,9 +84,9 @@ const Search: FC = () => {
       {details.mount && (
         <GifDetail setDetailGif={setDetails} props={details.props} />
       )}
-      <StyledApp details={details.mount ? "fixed" : "none"}>
+      <S.StyledApp details={details.mount ? "fixed" : "none"}>
         <NavMenu />
-        <Gifs screen={{ mount: data.mount, filter: filter }}>
+        <S.Gifs screen={{ mount: data.mount, filter: filter }}>
           <div
             style={{
               display: "flex",
@@ -123,26 +95,42 @@ const Search: FC = () => {
             }}
           >
             <h2 style={{ width: "130px" }}>Find your favorite gif</h2>
-            <NavSearchBar>
+            <S.NavSearchBar>
               <SearchBar
                 search={search}
                 handleSubmit={handleSubmit}
                 setSearch={setSearch}
               />
               <SelectNumberGifs theme={theme} setFilter={setFilter} />
-            </NavSearchBar>
+            </S.NavSearchBar>
             <div
-              style={{ display: "flex", flexWrap: "wrap", margin: "10px 0" }}
+              style={{ display: "flex", flexWrap: "wrap", margin: "10px 0 ", }}
             >
-              {tags.map((tag) => (
+              <S.ButtonSearchTags onClick={() => setMountTags(!mountTags)}>
+                <TagsIcon />
+              </S.ButtonSearchTags>
+              {tag.map((tag) => (
                 <Tags
-                  props={{ margin: "0 10px 0 0", position: "none" }}
+                  props={{ margin: "0 5px ", position: "none" }}
                   key={tag}
                   objs={tag}
+                  theme={theme}
                   handle={() => handleTags(tag)}
                 />
               ))}
             </div>
+            <div>
+              {mountTags && (
+                <CreateTags
+                  valueTags={valueTag}
+                  setValueTag={setValueTag}
+                  data={tag}
+                  setTags={setTags}
+                  setMountTags={setMountTags}
+                />
+              )}
+            </div>
+
           </div>
           {data.mount && (
             <>
@@ -160,7 +148,7 @@ const Search: FC = () => {
             />
           )}
           {typeof data?.data?.length === "undefined" && data.mount === false && (
-            <InitGif>
+            <S.InitGif>
               <svg
                 width="80"
                 height="80"
@@ -186,11 +174,11 @@ const Search: FC = () => {
                 </defs>
               </svg>
               <p>Search your favorite gif</p>
-            </InitGif>
+            </S.InitGif>
           )}
-        </Gifs>
-      </StyledApp>
-    </UserContext.Provider>
+        </S.Gifs>
+      </S.StyledApp>
+    </UserContext.Provider >
   );
 };
 
