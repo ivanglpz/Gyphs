@@ -68,7 +68,7 @@ export const MenuOpts = styled.div`
       }
     }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: flex;
     ul {
       display: flex;
@@ -78,7 +78,7 @@ export const MenuOpts = styled.div`
 
 export const MenuMobile = styled.div`
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     display: flex;
     align-items: center;
     justify-content: space-around;

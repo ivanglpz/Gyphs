@@ -8,14 +8,14 @@ interface Props {
     margin: string;
     position: string;
   };
-  theme: string
+  theme: string;
 }
 interface IButtonTag {
   props: {
     position: string;
     margin: string;
     bgColor: string;
-    theme: string
+    theme: string;
   };
 }
 const ButtonTag = styled.button<IButtonTag>`
@@ -41,7 +41,7 @@ const ButtonTag = styled.button<IButtonTag>`
       }
     }
     color: ${({ props }) => props.bgColor};
-    outline: 1px solid ${({ props }) => props.bgColor} ;
+    outline: 1px solid ${({ props }) => props.bgColor};
     outline-offset: -2px;
 
     background-color: transparent;

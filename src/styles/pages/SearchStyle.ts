@@ -57,6 +57,7 @@ export const Gifs = styled.div`
 `;
 export const NavSearchBar = styled.nav`
   display: flex;
+  flex-wrap: wrap;
 `;
 export const InitGif = styled.div`
   width: 100%;

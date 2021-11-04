@@ -9,7 +9,7 @@ interface IProps {
 
 const SelectStyle = styled.select`
   background-color: red;
-  border: 1px solid rgba(65, 65, 65, 0.5);
+  border: 1px solid ${({ theme }) => (theme === "light" ? "#2C2C2C" : "white")};
   border-radius: 5px;
   background-color: ${({ theme }: { theme: string }) =>
     theme === "light" ? "white" : colors.blackRaisin};

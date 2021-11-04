@@ -8,6 +8,7 @@ export const StyledForm = styled.form`
   box-sizing: border-box;
   border: 1px solid ${({ theme }) => (theme === "light" ? "#2C2C2C" : "white")};
   border-radius: 5px;
+  width: auto;
   input {
     height: 41px;
     width: auto;
@@ -16,7 +17,9 @@ export const StyledForm = styled.form`
     margin: 0 0 0 5px;
   }
   @media (max-width: 767px) {
-    width: auto;
+    input {
+      width: 145px;
+    }
   }
 `;
 export const FormButtonSearch = styled.button`
