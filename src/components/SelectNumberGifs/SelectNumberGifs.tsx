@@ -5,6 +5,7 @@ import { colors } from "../../styles/colors";
 interface IProps {
   theme: string;
   setFilter: Dispatch<SetStateAction<number>>;
+  value: number;
 }
 
 const SelectStyle = styled.select`
@@ -26,14 +27,13 @@ const SelectNumberGifs: FC<IProps> = (props) => {
       onChange={(event: { target: { value: string | number } }) =>
         props.setFilter(Number(event.target.value))
       }
+      defaultValue="DEFAULT"
     >
       <option value={5}>5</option>
       <option value={10}>10</option>
       <option value={15}>15</option>
       <option value={20}>20</option>
-      <option value={50} selected>
-        50
-      </option>
+      <option value="DEFAULT">50</option>
     </SelectStyle>
   );
 };

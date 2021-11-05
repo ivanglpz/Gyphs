@@ -1,5 +1,7 @@
+import { IGif } from "@giphy/js-types";
+
 export interface IData {
-  id: string;
+  id: string | number;
   title: string;
   trending_datetime: string;
   images: {
@@ -22,11 +24,11 @@ export interface IData {
 export interface IParams {
   method: string;
   search?: string;
-  limit?: string | number;
+  limit: number;
 }
 
 export type IStateData = {
-  data: IData[];
+  data: IGif[];
   result?: string;
   mount: boolean;
 };

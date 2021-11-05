@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { colors } from "../../colors";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -23,7 +22,7 @@ export const StyledForm = styled.form`
   }
 `;
 export const FormButtonSearch = styled.button`
-  height: 31px;
+  /* height: 31px; */
   cursor: pointer;
   border: none;
   background-color: transparent;

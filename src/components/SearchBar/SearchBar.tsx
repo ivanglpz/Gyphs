@@ -1,32 +1,35 @@
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import styled from "@emotion/styled";
-import { Dispatch, FC, SetStateAction, useContext } from "react";
-import { JsxChild } from "typescript";
+import { ChangeEvent, Dispatch, FC, SetStateAction, useContext } from "react";
 import MyContext from "../../hooks/useTheme";
-import { colors } from "../../styles/colors";
 import * as S from "../../styles/components/SearchBar/SearchBarStyle";
-import DeleteIcon from "../Svg/Delete";
-import { SearchIcon } from "../Svg/NavBarIcons";
+import ButtonDelete from "../Buttons/ButtonDelete";
 interface Props {
-  setSearch: Dispatch<SetStateAction<string>>;
+  setValue: Dispatch<SetStateAction<string>>;
   handleSubmit: (event: { preventDefault: () => void }) => void;
-  search: string;
-  icon: ReactJSXElement;
-  placeHolder: string
+  value: string;
+  IconButton: ReactJSXElement;
+  placeHolder: string;
 }
-const SearchBar: FC<Props> = ({ search, handleSubmit, setSearch, icon, placeHolder }) => {
+const SearchBar: FC<Props> = ({
+  value,
+  handleSubmit,
+  setValue,
+  IconButton,
+  placeHolder,
+}) => {
   const { theme } = useContext(MyContext);
-
   return (
     <S.StyledForm onSubmit={handleSubmit} theme={theme}>
       <input
         type="text"
         placeholder={placeHolder}
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
+        value={value}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setValue(event.target.value)
+        }
       />
-      {search && <DeleteIcon Fn={() => setSearch("")} />}
-      <S.FormButtonSearch type="submit">{icon}</S.FormButtonSearch>
+      {value && <ButtonDelete CustomFuction={() => setValue("")} />}
+      <S.FormButtonSearch type="submit">{IconButton}</S.FormButtonSearch>
     </S.StyledForm>
   );
 };

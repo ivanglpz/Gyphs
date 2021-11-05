@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 export const ButtonSearchTags = styled.button`
   background-color: #38b3e8;
   cursor: pointer;
-  /* padding: 10px; */
   border-radius: 5px;
   border: none;
   width: 40px;
@@ -46,7 +45,7 @@ export const Gifs = styled.div`
     width: auto;
     height: ${({ screen }: IScreen) =>
       (screen.mount === false && "100vh") ||
-      (screen.mount === false && screen.filter === 5)
+      (screen.mount === true && screen.filter === 5)
         ? "100vh"
         : " none"};
     margin: 0px;

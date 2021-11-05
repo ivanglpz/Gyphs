@@ -1,3 +1,4 @@
+
 import { FC, useEffect, useState } from "react";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";

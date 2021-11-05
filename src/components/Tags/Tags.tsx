@@ -9,6 +9,7 @@ interface Props {
     position: string;
   };
   theme: string;
+  size: string;
 }
 interface IButtonTag {
   props: {
@@ -16,6 +17,7 @@ interface IButtonTag {
     margin: string;
     bgColor: string;
     theme: string;
+    size: string;
   };
 }
 const ButtonTag = styled.button<IButtonTag>`
@@ -27,17 +29,13 @@ const ButtonTag = styled.button<IButtonTag>`
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  height: 40px;
+  height: ${({ props }) => props.size};
   font-weight: 500;
-  svg {
-    path {
-      fill: white;
-    }
-  }
   &:hover {
     svg {
       path {
-        fill: ${({ props }) => props.bgColor};
+        /* fill: ${({ props }) => props.bgColor}; */
+        stroke: ${({ props }) => props.bgColor};
       }
     }
     color: ${({ props }) => props.bgColor};
@@ -62,13 +60,13 @@ const colorsTags: string[] = [
   "#43281c",
 ];
 
-const Tags: FC<Props> = ({ handle, objs, props, theme }) => {
+const Tags: FC<Props> = ({ handle, objs, props, theme, size }) => {
   const [state, setstate] = useState(
     Math.floor(Math.random() * colorsTags.length)
   );
   return (
     <ButtonTag
-      props={{ ...props, bgColor: colorsTags[state], theme }}
+      props={{ ...props, bgColor: colorsTags[state], theme, size }}
       onClick={handle}
     >
       {objs}

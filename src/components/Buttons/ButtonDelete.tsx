@@ -3,7 +3,7 @@ import { FC } from "react";
 import { colors } from "../../styles/colors";
 
 interface IProps {
-  Fn: () => void;
+  CustomFuction: () => void;
 }
 const Button = styled.button`
   display: flex;
@@ -12,11 +12,10 @@ const Button = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  border-radius: 10px;
 `;
-const DeleteIcon: FC<IProps> = (props) => {
+const ButtonDelete: FC<IProps> = (props) => {
   return (
-    <Button type="button" onClick={props.Fn}>
+    <Button type="button" onClick={props.CustomFuction}>
       <svg
         width="28"
         height="28"
@@ -37,4 +36,4 @@ const DeleteIcon: FC<IProps> = (props) => {
   );
 };
 
-export default DeleteIcon;
+export default ButtonDelete;
