@@ -61,7 +61,7 @@ const colorsTags: string[] = [
 ];
 
 const Tags: FC<Props> = ({ handle, objs, props, theme, size }) => {
-  const [state, setstate] = useState(
+  const [state,] = useState(
     Math.floor(Math.random() * colorsTags.length)
   );
   return (

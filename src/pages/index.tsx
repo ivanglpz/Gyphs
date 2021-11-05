@@ -17,12 +17,12 @@ const index: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
 
   useEffect(() => {
-    useFetch({ method: "trending" }).then((data) => setData(data));
+    useFetch({ method: "trending", limit: 50 }).then((data) => setData(data));
   }, []);
   return (
     <main>
       <Head>
-        <title>Gyphs</title>
+        <title>Gyphs</title>;
       </Head>
       <S.NavStyle>
         <Symbol color={colors.blue} size={{ width: "56px", height: "56px" }} />

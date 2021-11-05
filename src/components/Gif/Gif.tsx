@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { FC, useEffect, useState } from "react";
 import Image from "next/image";
+import { FC } from "react";
 
 interface IGifData {
   gif: {

@@ -1,4 +1,3 @@
-
 import { FC, useEffect, useState } from "react";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
@@ -18,7 +17,7 @@ const Home: FC = () => {
   const [detailGif, setDetailGif] = useState<IFormGif>({} as IFormGif);
 
   useEffect(() => {
-    useFetch({ method: "trending" }).then((data) => setstate(data));
+    useFetch({ method: "trending", limit: 50 }).then((data) => setstate(data));
   }, []);
   return (
     <UserContext.Provider value={{ setDetailGif }}>

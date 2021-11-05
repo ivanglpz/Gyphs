@@ -1,11 +1,11 @@
-import React, { FC, useContext, useState } from "react";
 import Image from "next/image";
+import React, { FC, useContext } from "react";
+import MyContext from "../../hooks/useTheme";
+import { colors } from "../../styles/colors";
 import * as S from "../../styles/components/GifDetail/GifDetailStyle";
 import Gif from "../Gif/Gif";
 import socialMedia from "./data.json";
 import { IGifDetails } from "./types";
-import MyContext from "../../hooks/useTheme";
-import { colors } from "../../styles/colors";
 
 interface IAttribute {
   name: string;

@@ -1,4 +1,3 @@
-
 import Head from "next/head";
 import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
 import tags from "../assets/tags.json";
@@ -69,7 +68,6 @@ const Search: FC = () => {
   useEffect(() => {
     tag && localStorage.setItem("@tags", JSON.stringify(tag));
   }, [tag]);
-
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>

@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import { colors } from "./colors";
+import { css } from '@emotion/react'
+import { colors } from './colors'
 
 export const Materialize = (theme: string) => css`
   /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -12,7 +12,7 @@ export const Materialize = (theme: string) => css`
   html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   /* Sections
    ========================================================================== */
@@ -21,15 +21,15 @@ export const Materialize = (theme: string) => css`
  */
   body {
     margin: 0;
-    background-color: ${theme === "light" ? "white" : colors.blackRaisin};
-    color: ${theme === "light" ? colors.blackRaisin : "white"};
+    background-color: ${theme === 'light' ? 'white' : colors.blackRaisin};
+    color: ${theme === 'light' ? colors.blackRaisin : 'white'};
     transition: 0.3s;
   }
   input {
-    color: ${theme === "light" ? colors.blackRaisin : "white"};
+    color: ${theme === 'light' ? colors.blackRaisin : 'white'};
   }
   a {
-    color: ${theme === "light" ? colors.blackRaisin : "white"};
+    color: ${theme === 'light' ? colors.blackRaisin : 'white'};
 
     text-decoration: none;
   }
@@ -150,18 +150,18 @@ export const Materialize = (theme: string) => css`
  * Correct the inability to style clickable types in iOS and Safari.
  */
   button,
-  [type="button"],
-  [type="reset"],
-  [type="submit"] {
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
     -webkit-appearance: button;
   }
   /**
  * Remove the inner border and padding in Firefox.
  */
   button::-moz-focus-inner,
-  [type="button"]::-moz-focus-inner,
-  [type="reset"]::-moz-focus-inner,
-  [type="submit"]::-moz-focus-inner {
+  [type='button']::-moz-focus-inner,
+  [type='reset']::-moz-focus-inner,
+  [type='submit']::-moz-focus-inner {
     border-style: none;
     padding: 0;
   }
@@ -169,9 +169,9 @@ export const Materialize = (theme: string) => css`
  * Restore the focus styles unset by the previous rule.
  */
   button:-moz-focusring,
-  [type="button"]:-moz-focusring,
-  [type="reset"]:-moz-focusring,
-  [type="submit"]:-moz-focusring {
+  [type='button']:-moz-focusring,
+  [type='reset']:-moz-focusring,
+  [type='submit']:-moz-focusring {
     outline: 1px dotted ButtonText;
   }
   /**
@@ -204,23 +204,23 @@ export const Materialize = (theme: string) => css`
  * 1. Add the correct box sizing in IE 10.
  * 2. Remove the padding in IE 10.
  */
-  [type="checkbox"],
-  [type="radio"] {
+  [type='checkbox'],
+  [type='radio'] {
     box-sizing: border-box; /* 1 */
     padding: 0; /* 2 */
   }
   /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
-  [type="number"]::-webkit-inner-spin-button,
-  [type="number"]::-webkit-outer-spin-button {
+  [type='number']::-webkit-inner-spin-button,
+  [type='number']::-webkit-outer-spin-button {
     height: auto;
   }
-  [type="search"] {
+  [type='search'] {
     -webkit-appearance: textfield; /* 1 */
     outline-offset: -2px; /* 2 */
   }
-  [type="search"]::-webkit-search-decoration {
+  [type='search']::-webkit-search-decoration {
     -webkit-appearance: none;
   }
   ::-webkit-file-upload-button {
@@ -241,25 +241,25 @@ export const Materialize = (theme: string) => css`
   }
   /* latin-ext */
   @font-face {
-    font-family: "Red Hat Text";
+    font-family: 'Red Hat Text';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
     src: url(https://fonts.gstatic.com/s/redhattext/v3/RrQIbohi_ic6B3yVSzGBrMxY04I4Eu2EBVk.woff2)
-      format("woff2");
+      format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
-    font-family: "Red Hat Text";
+    font-family: 'Red Hat Text';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
     src: url(https://fonts.gstatic.com/s/redhattext/v3/RrQIbohi_ic6B3yVSzGBrMxY04I4HO2E.woff2)
-      format("woff2");
+      format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
       U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
       U+2215, U+FEFF, U+FFFD;
   }
-`;
+`

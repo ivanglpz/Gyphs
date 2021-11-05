@@ -1,12 +1,13 @@
 import { Global } from "@emotion/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { createContext, useEffect, useLayoutEffect, useState } from "react";
-import url from "../styles/fonts";
+import { useEffect, useLayoutEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
+import MyContext from "../hooks/useTheme";
+import url from "../styles/fonts";
 import { Materialize } from "../styles/Normalize";
-import MyContext, { Theme } from "../hooks/useTheme";
+
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [theme, setTheme] = useState<string>("light");

@@ -4,7 +4,7 @@ interface Props {
   color: string;
 }
 
-const Url: FC<Props> = ({ color }) => {
+const Url: FC<Props> = () => {
   return (
     <svg
       width="24"
