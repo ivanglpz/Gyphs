@@ -1,11 +1,9 @@
-import { createContext, Dispatch, SetStateAction, useState } from 'react'
-// import { ITheme } from "../pages/_app";
-
+import { createContext, Dispatch, SetStateAction } from "react";
 export interface Theme {
-  theme: string
-  setTheme: Dispatch<SetStateAction<string>>
+  theme: string;
+  setTheme: Dispatch<SetStateAction<string>>;
 }
 
-const MyContext = createContext<Theme>({} as Theme)
+const ThemeContext = createContext<Theme>({} as Theme);
 
-export default MyContext
+export default ThemeContext;

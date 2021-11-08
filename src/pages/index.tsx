@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigation } from "swiper";
 import { SwiperSlide } from "swiper/react";
 import about from "../assets/information.json";
@@ -13,7 +13,7 @@ import { colors } from "../styles/colors";
 import * as S from "../styles/pages/IndexStyle";
 import { IAbout } from "../types/types";
 
-const index: FC = () => {
+const Index = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const index: FC = () => {
         <S.Home>
           <h2>Find your favorites gifs and have fun</h2>
           <p>find all kinds of gifs, and share it with your friends.</p>
-          <Link href="/Home">
+          <Link href="/Login" passHref>
             <S.ButtonLink>Start</S.ButtonLink>
           </Link>
         </S.Home>
@@ -80,4 +80,4 @@ const index: FC = () => {
   );
 };
 
-export default index;
+export default Index;

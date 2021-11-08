@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
-import { colors } from '../colors'
-import { Swiper } from 'swiper/react'
+import styled from "@emotion/styled";
+import { colors } from "../colors";
+import { Swiper } from "swiper/react";
 
 export const NavStyle = styled.nav`
   display: flex;
@@ -10,7 +10,7 @@ export const NavStyle = styled.nav`
     /* color: ${colors.blackRaisin}; */
     font-size: 24px;
   }
-`
+`;
 export const Home = styled.div`
   h2 {
     /* color: ${colors.blackRaisin}; */
@@ -28,7 +28,7 @@ export const Home = styled.div`
     justify-content: center;
     align-items: center;
   }
-`
+`;
 
 export const ButtonLink = styled.a`
   background-color: ${colors.blue};
@@ -43,20 +43,20 @@ export const ButtonLink = styled.a`
     background-color: transparent;
     color: ${colors.blue};
   }
-`
+`;
 export const HomeSlider = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-`
+`;
 export const HomeSwiper = styled(Swiper)`
   width: 600px;
   @media (max-width: 540px) {
     width: 350px;
   }
-`
+`;
 
 export const HomeBox = styled.div`
   display: flex;
@@ -66,14 +66,14 @@ export const HomeBox = styled.div`
   @media (max-width: 900px) {
     height: 500px;
   }
-`
+`;
 
 export const AboutBox = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 35px;
-`
+`;
 export const About = styled.div`
   /* color: ${colors.blackRaisin}; */
   h3 {
@@ -85,7 +85,7 @@ export const About = styled.div`
   @media (max-width: 765px) {
     text-align: center;
   }
-`
+`;
 
 export const FooterBox = styled.footer`
   margin: 100px 0 0 0;
@@ -97,4 +97,4 @@ export const FooterBox = styled.footer`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;

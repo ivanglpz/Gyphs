@@ -61,9 +61,7 @@ const colorsTags: string[] = [
 ];
 
 const Tags: FC<Props> = ({ handle, objs, props, theme, size }) => {
-  const [state,] = useState(
-    Math.floor(Math.random() * colorsTags.length)
-  );
+  const [state] = useState(Math.floor(Math.random() * colorsTags.length));
   return (
     <ButtonTag
       props={{ ...props, bgColor: colorsTags[state], theme, size }}

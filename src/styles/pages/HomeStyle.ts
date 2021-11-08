@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 export const StyledBox = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const StyledBox = styled.div`
     display: flex;
     flex-direction: column-reverse;
   }
-`
+`;
 
 export const Gifs = styled.div`
   width: 800px;
@@ -18,4 +18,4 @@ export const Gifs = styled.div`
     height: ${({ screen }: { screen: string }) => screen};
     padding: 20px;
   }
-`
+`;

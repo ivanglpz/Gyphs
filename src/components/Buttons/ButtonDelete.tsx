@@ -4,6 +4,7 @@ import { colors } from "../../styles/colors";
 
 interface IProps {
   CustomFuction: () => void;
+  position?: string;
 }
 const Button = styled.button`
   display: flex;
@@ -12,10 +13,15 @@ const Button = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  position: ${({ position }: { position: string }) => position};
 `;
 const ButtonDelete: FC<IProps> = (props) => {
   return (
-    <Button type="button" onClick={props.CustomFuction}>
+    <Button
+      position={props.position ? "absolute" : "none"}
+      type="button"
+      onClick={props.CustomFuction}
+    >
       <svg
         width="28"
         height="28"

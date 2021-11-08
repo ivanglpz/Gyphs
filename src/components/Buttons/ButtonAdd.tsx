@@ -1,7 +1,5 @@
 import { FC } from "react";
 
-
-
 const ButtonAdd: FC = () => {
   return (
     <svg

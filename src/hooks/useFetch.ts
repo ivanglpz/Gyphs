@@ -1,25 +1,25 @@
-import { IData, IParams, IStateData } from './types'
-import { IGif } from '@giphy/js-types'
+import { IData, IParams, IStateData } from "./types";
+import { IGif } from "@giphy/js-types";
 
 const useFetch = async ({ method, search, limit }: IParams) => {
   const url = `https://api.giphy.com/v1/gifs/${method}?api_key=${
     process.env.NEXT_PUBLIC_API_KEY
-  }${limit ? '' : `&limit=${limit}`}${search ? `&q=${search}` : ''}`
-  console.log(url)
+  }${limit ? "" : `&limit=${limit}`}${search ? `&q=${search}` : ""}`;
+  console.log(url);
 
-  const resp = await fetch(url)
-  const { data }: IStateData = await resp.json()
-  console.log(data)
+  const resp = await fetch(url);
+  const { data }: IStateData = await resp.json();
+  console.log(data);
 
   if (data.length > 0) {
     if (search) {
-      return { data: data, result: search, mount: true }
+      return { data: data, result: search, mount: true };
     } else {
-      return { data: data, result: method, mount: true }
+      return { data: data, result: method, mount: true };
     }
   } else {
-    return { data: data, result: search, mount: false }
+    return { data: data, result: search, mount: false };
   }
-}
+};
 
-export default useFetch
+export default useFetch;
