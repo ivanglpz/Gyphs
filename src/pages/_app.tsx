@@ -27,11 +27,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    setTheme(Cookies.get("@theme") || "light");
+    setTheme(JSON.parse(Cookies.get("@theme") || "light"));
   }, []);
 
   useEffect(() => {
-    Cookies.set("@theme", theme);
+    theme && Cookies.set("@theme", JSON.stringify(theme));
   }, [theme]);
 
   useEffect(() => {
