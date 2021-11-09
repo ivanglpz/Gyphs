@@ -22,10 +22,6 @@ const Home: FC = () => {
   const [detailGif, setDetailGif] = useState<IFormGif>({} as IFormGif);
   const { theme } = useContext(MyContext);
 
-  function isObjEmpty(obj: any) {
-    return Object.keys(obj).length === 0;
-  }
-
   const handleTags = (tag: string): void => {
     if (data.result === tag) return;
     setForm({

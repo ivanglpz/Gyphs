@@ -28,12 +28,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => {
     const cookies = new Cookies();
-
     setTheme(cookies.get("@theme") || "light");
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem("@theme", theme);
     const cookies = new Cookies();
     cookies.set("@theme", theme);
   }, [theme]);
