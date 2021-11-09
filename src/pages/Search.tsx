@@ -19,7 +19,7 @@ import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
-import Cookies from "universal-cookie/es6";
+import Cookies from "js-cookie";
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
@@ -32,6 +32,7 @@ const Search: FC = () => {
   const { theme } = useContext(MyContext);
 
   const handleTags = (tag: string): void => {
+    if (data.result === tag) return;
     setSearch(tag);
     setForm({
       ...form,
@@ -58,8 +59,7 @@ const Search: FC = () => {
     }
   };
   useEffect(() => {
-    const cookies = new Cookies();
-    const storage: string[] = cookies.get("@tags") || JSON.parse("[]");
+    const storage: string[] = JSON.parse(Cookies.get("@tags") || "[]");
     setTags(storage?.length === 0 ? tags : storage);
   }, []);
   useEffect(() => {
@@ -68,9 +68,9 @@ const Search: FC = () => {
     }
   }, [form]);
   useEffect(() => {
-    const cookies = new Cookies();
-    tags && cookies.set("@tags", tag);
+    tag && Cookies.set("@tags", JSON.stringify(tag));
   }, [tag]);
+  console.log(tag);
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>
@@ -117,14 +117,14 @@ const Search: FC = () => {
                 handle={() => setCreateTag(!createTag)}
                 size="auto"
               />
-              {tag.map((tag) => (
+              {tag?.map((nameTag) => (
                 <Tags
                   props={{ margin: "0 5px 5px", position: "none" }}
-                  key={tag}
-                  objs={tag}
+                  key={nameTag}
+                  objs={nameTag}
                   theme={theme}
                   size="40px"
-                  handle={() => handleTags(tag)}
+                  handle={() => handleTags(nameTag)}
                 />
               ))}
             </div>
