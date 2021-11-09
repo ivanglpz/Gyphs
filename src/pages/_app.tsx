@@ -9,7 +9,6 @@ import ThemeContext from "../hooks/useTheme";
 import url from "../styles/fonts";
 import { Materialize } from "../styles/Normalize";
 import { useRouter } from "next/router";
-import Cookies from "universal-cookie/es6";
 
 export interface IUser {
   authentication?: boolean;
@@ -26,16 +25,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [userApp, setUserApp] = useState<IUser>({} as IUser);
   const router = useRouter();
 
-  useEffect(() => {
-    const cookies = new Cookies();
-
-    setTheme(cookies.get("@theme") || "light");
+  useLayoutEffect(() => {
+    setTheme(localStorage.getItem("@theme") || "light");
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem("@theme", theme);
-    const cookies = new Cookies();
-    cookies.set("@theme", theme);
+    localStorage.setItem("@theme", theme);
   }, [theme]);
 
   useEffect(() => {

@@ -19,13 +19,12 @@ import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
-import Cookies from "universal-cookie/es6";
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
   const [search, setSearch] = useState<string>("");
-  const [form, setForm] = useState<IParams>({} as IParams);
   const [filter, setFilter] = useState<number>(50);
+  const [form, setForm] = useState<IParams>({} as IParams);
   const [details, setDetails] = useState<IFormGif>({} as IFormGif);
   const [createTag, setCreateTag] = useState<boolean>(false);
   const [tag, setTags] = useState<string[]>(tags);
@@ -57,9 +56,8 @@ const Search: FC = () => {
       setData({ ...data, mount: false });
     }
   };
-  useEffect(() => {
-    const cookies = new Cookies();
-    const storage: string[] = cookies.get("@tags") || JSON.parse("[]");
+  useLayoutEffect(() => {
+    const storage: string[] = JSON.parse(localStorage.getItem("@tags") || "[]");
     setTags(storage?.length === 0 ? tags : storage);
   }, []);
   useEffect(() => {
@@ -68,8 +66,7 @@ const Search: FC = () => {
     }
   }, [form]);
   useEffect(() => {
-    const cookies = new Cookies();
-    tags && cookies.set("@tags", tag);
+    tag && localStorage.setItem("@tags", JSON.stringify(tag));
   }, [tag]);
 
   return (
