@@ -34,10 +34,10 @@ const EditTag: FC<IProps> = ({ props }) => {
   return (
     <div key={props.tag}>
       <ItemList value={newTag} disabled={edit} onChange={handleChangeTag} />
-      <button onClick={() => setEdit(!edit)}>edit</button>
+      {/* <button onClick={() => setEdit(!edit)}>edit</button>
       <button onClick={() => props.handleEditTag({ tag: props.tag, newTag })}>
         Ok
-      </button>
+      </button> */}
       <ButtonDelete CustomFuction={() => props.handleDeleteTag(props.tag)} />
     </div>
   );
