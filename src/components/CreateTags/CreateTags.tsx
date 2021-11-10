@@ -3,6 +3,7 @@ import { Dispatch, FC, SetStateAction, useState } from "react";
 import ButtonAdd from "../Buttons/ButtonAdd";
 import ButtonDelete from "../Buttons/ButtonDelete";
 import SearchBar from "../SearchBar/SearchBar";
+import EditTag from "./EditTag/EditTag";
 
 interface IProps {
   setTags: Dispatch<SetStateAction<string[]>>;
@@ -10,18 +11,6 @@ interface IProps {
   data: string[];
   handleTags: (tag: string) => void;
 }
-
-const ItemList = styled.li`
-  display: flex;
-  align-items: center;
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: none;
-  }
-`;
 
 const CreateTags: FC<IProps> = (props) => {
   const [valueTag, setValueTag] = useState("");
@@ -44,6 +33,13 @@ const CreateTags: FC<IProps> = (props) => {
     props.setTags(props.data.filter((dataTag) => dataTag !== tag));
   };
 
+  const handleEditTag = ({ tag, newTag }: { newTag: string; tag: string }) => {
+    if (props.data.filter((dataTag) => dataTag === tag)) {
+      handleDeleteTag(tag);
+    }
+  };
+
+  console.log(props.data);
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -59,11 +55,8 @@ const CreateTags: FC<IProps> = (props) => {
         <b>List</b>
       </p>
       <ul>
-        {props.data.map((tag) => (
-          <ItemList key={tag}>
-            {tag}
-            <ButtonDelete CustomFuction={() => handleDeleteTag(tag)} />
-          </ItemList>
+        {props.data.map((tag, index) => (
+          <EditTag props={{ tag, index, handleDeleteTag, handleEditTag }} />
         ))}
       </ul>
     </>
