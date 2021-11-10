@@ -13,14 +13,12 @@ interface IFetch {
 
 export const useLoginUser = ({
   body,
-  setUserApp,
 }: {
   body: {
     type: string;
     username: string;
     password: string;
   };
-  setUserApp: Dispatch<SetStateAction<IData>>;
 }) => {
   const [data, setData] = useState<IData>({} as IData);
 
@@ -35,7 +33,7 @@ export const useLoginUser = ({
       password: string;
     }) => {
       try {
-        const url = `http://localhost:8000/${type}`;
+        const url = `https://gyphs.herokuapp.com/${type}`;
         const res = await fetch(url, {
           method: "POST",
           headers: {
@@ -46,17 +44,15 @@ export const useLoginUser = ({
         const data: IData = await res.json();
         if (data) {
           setData(data);
-          setUserApp(data);
         } else {
+          setData({ authentication: false, type: "logger", token: "false" });
           throw new Error("Data not found");
         }
       } catch (error) {
         throw new Error(`${error}`);
       }
     };
-    if (body.type && body.username && body.password) {
-      useFetch(body);
-    }
+    body.type && useFetch(body);
   }, [body]);
   return data;
 };

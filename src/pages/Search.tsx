@@ -71,6 +71,7 @@ const Search: FC = () => {
   useEffect(() => {
     setData(useDataGif);
   }, [useDataGif]);
+  console.log(tag);
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>

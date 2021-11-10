@@ -11,15 +11,7 @@ export interface IData {
 }
 
 export interface IUser {
-  userApp: {
-    authentication?: boolean;
-    user?: {
-      id: string | number;
-      username: string;
-    };
-    type?: string;
-    token?: string;
-  };
+  userApp: IData;
   setUserApp: Dispatch<SetStateAction<IData>>;
 }
 

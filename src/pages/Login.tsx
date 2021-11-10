@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import FormLogin from "../components/FormLogin/FormLogin";
 import Symbol from "../components/Svg/NavBarIcons";
 import { useLoginUser } from "../hooks/useLoginUser";
@@ -22,7 +22,7 @@ const Login: FC = () => {
   const [mount, setMount] = useState(false);
   const [body, setBody] = useState<IBody>({} as IBody);
 
-  const { userApp, setUserApp } = useContext(userLoggerContext);
+  const { setUserApp } = useContext(userLoggerContext);
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -49,9 +49,10 @@ const Login: FC = () => {
     setUser({ username: "", password: "" } as IUser);
   };
 
-  useLoginUser({ body, setUserApp });
-
-  // console.log(userData);
+  const login = useLoginUser({ body });
+  useEffect(() => {
+    setUserApp(login);
+  }, [login]);
 
   return (
     <S.LoginStyle>

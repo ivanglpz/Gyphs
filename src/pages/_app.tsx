@@ -26,15 +26,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [userApp, setUserApp] = useState<IUser>({} as IUser);
   const router = useRouter();
 
+  useLayoutEffect(() => {
+    setTheme(JSON.parse(Cookies.get("@theme") || "light"));
+  }, []);
   useEffect(() => {
-    theme && Cookies.set("@theme", JSON.stringify(theme));
+    Cookies.set("@theme", JSON.stringify(theme));
   }, [theme]);
 
   useEffect(() => {
-    if (userApp.authentication === true && userApp.token) {
-      router.replace("/Home");
-    }
-    router.push;
+    userApp.authentication && router.replace("/Home");
   }, [userApp]);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
