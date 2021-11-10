@@ -5,7 +5,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "Clint": "eslint \"src/**/*.{ts,tsx}\" --quiet "
+    "eslint": "eslint --ext .ts src"
   },
   "dependencies": {
     "firebase": "^9.1.3",

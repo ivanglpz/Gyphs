@@ -7,7 +7,7 @@ import Loading from "../components/Svg/Loading";
 import Tags from "../components/Tags/Tags";
 import { IParams, IStateData } from "../hooks/types";
 import UserContext from "../hooks/useContext";
-import useFetch from "../hooks/useFetch";
+import useFetchGifs from "../hooks/useFetchGifs";
 import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
@@ -33,13 +33,13 @@ const Home: FC = () => {
     setData({ ...data, mount: false });
   };
 
+  const useDataGif = useFetchGifs(
+    Object.keys(form).length === 0 ? { method: "trending", limit: 50 } : form
+  );
+
   useEffect(() => {
-    if (Object.keys(form).length === 0) {
-      useFetch({ method: "trending", limit: 50 }).then((data) => setData(data));
-    } else {
-      useFetch(form).then((data) => setData(data));
-    }
-  }, [form]);
+    setData(useDataGif);
+  }, [useDataGif]);
 
   return (
     <UserContext.Provider value={{ setDetailGif }}>

@@ -8,7 +8,7 @@ import about from "../assets/information.json";
 import Gif from "../components/Gif/Gif";
 import Symbol from "../components/Svg/NavBarIcons";
 import { IStateData } from "../hooks/types";
-import useFetch from "../hooks/useFetch";
+import useFetchGifs from "../hooks/useFetchGifs";
 import { colors } from "../styles/colors";
 import * as S from "../styles/pages/IndexStyle";
 import { IAbout } from "../types/types";
@@ -16,9 +16,12 @@ import { IAbout } from "../types/types";
 const Index = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
 
+  const useDataGif = useFetchGifs({ method: "trending", limit: 50 });
+
   useEffect(() => {
-    useFetch({ method: "trending", limit: 50 }).then((data) => setData(data));
-  }, []);
+    setData(useDataGif);
+  }, [useDataGif]);
+
   return (
     <main>
       <Head>

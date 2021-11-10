@@ -1,5 +1,6 @@
+import Cookies from "js-cookie";
 import Head from "next/head";
-import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import tags from "../assets/tags.json";
 import CreateTags from "../components/CreateTags/CreateTags";
 import GifDetail from "../components/GifDetail/GifDetail";
@@ -13,13 +14,12 @@ import Symbol, { SearchIcon } from "../components/Svg/NavBarIcons";
 import Tags from "../components/Tags/Tags";
 import { IParams, IStateData } from "../hooks/types";
 import UserContext from "../hooks/useContext";
-import useFetch from "../hooks/useFetch";
+import useFetchGifs from "../hooks/useFetchGifs";
 import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
-import Cookies from "js-cookie";
 
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
@@ -62,15 +62,15 @@ const Search: FC = () => {
     const storage: string[] = JSON.parse(Cookies.get("@tags") || "[]");
     setTags(storage?.length === 0 ? tags : storage);
   }, []);
-  useEffect(() => {
-    if (form.method) {
-      useFetch(form).then((data) => setData(data));
-    }
-  }, [form]);
+
   useEffect(() => {
     tag && Cookies.set("@tags", JSON.stringify(tag));
   }, [tag]);
-  console.log(tag);
+  const useDataGif = useFetchGifs(form);
+
+  useEffect(() => {
+    setData(useDataGif);
+  }, [useDataGif]);
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>

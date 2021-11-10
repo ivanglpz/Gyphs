@@ -26,10 +26,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [userApp, setUserApp] = useState<IUser>({} as IUser);
   const router = useRouter();
 
-  useLayoutEffect(() => {
-    setTheme(JSON.parse(Cookies.get("@theme") || "light"));
-  }, []);
-
   useEffect(() => {
     theme && Cookies.set("@theme", JSON.stringify(theme));
   }, [theme]);
