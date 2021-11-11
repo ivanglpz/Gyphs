@@ -14,6 +14,7 @@ export const StyledForm = styled.form`
     border: none;
     background-color: transparent;
     margin: 0 0 0 5px;
+    outline: none;
   }
   @media (max-width: 767px) {
     input {

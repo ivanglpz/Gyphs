@@ -20,11 +20,16 @@ import { colors } from "../styles/colors";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
 
+interface ITags {
+  tag: string;
+  limit: number;
+}
+
 const Search: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
   const [search, setSearch] = useState<string>("");
   const [form, setForm] = useState<IParams>({} as IParams);
-  const [filter, setFilter] = useState<number>(50);
+  const [filter, setFilter] = useState<number>(30);
   const [details, setDetails] = useState<IFormGif>({} as IFormGif);
   const [createTag, setCreateTag] = useState<boolean>(false);
   const [tag, setTags] = useState<string[]>(tags);
@@ -32,14 +37,16 @@ const Search: FC = () => {
 
   const handleTags = (tag: string): void => {
     if (data.result === tag) return;
-    setSearch(tag);
-    setForm({
-      ...form,
-      method: "search",
-      search: tag,
-      limit: filter,
-    });
-    setData({ ...data, mount: false });
+    else {
+      setSearch(tag);
+      setForm({
+        ...form,
+        method: "search",
+        search: tag,
+        limit: filter,
+      });
+      setData({ ...data, mount: false });
+    }
   };
 
   const handleSubmit = (event: { preventDefault: () => void }): void => {
