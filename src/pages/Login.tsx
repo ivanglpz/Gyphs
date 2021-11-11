@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FC, useContext, useEffect, useState } from "react";
 import FormLogin from "../components/FormLogin/FormLogin";
+import GHead from "../components/Head/Head";
 import Symbol from "../components/Svg/NavBarIcons";
 import { useLoginUser } from "../hooks/useLoginUser";
 import userLoggerContext from "../hooks/userLoggerContext";
@@ -19,7 +20,7 @@ interface IBody {
 }
 const Login: FC = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [mount, setMount] = useState(false);
+  const [mount, setMount] = useState<boolean>(false);
   const [body, setBody] = useState<IBody>({} as IBody);
 
   const { setUserApp } = useContext(userLoggerContext);
@@ -55,36 +56,39 @@ const Login: FC = () => {
   }, [login]);
 
   return (
-    <S.LoginStyle>
-      <S.LoginBody>
-        <FormLogin
-          title={mount ? "SignUp" : "SignIn"}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          user={user}
-        />
+    <>
+      <GHead title="Gyphs | Login" />
+      <S.LoginStyle>
+        <S.LoginBody>
+          <FormLogin
+            title={mount ? "SignUp" : "SignIn"}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            user={user}
+          />
 
-        <p>
-          {mount ? "You have an account?" : "Don´t have an accout"}
-          <span>
-            <S.ButtonRegister onClick={handleMount}>
-              {mount ? "SignIn" : "SignUp"}
-            </S.ButtonRegister>
-          </span>{" "}
-        </p>
-        <Link href="/">
-          <a>
-            <Symbol
-              color={colors.blue}
-              size={{ width: "58px", height: "58px" }}
-            />
-          </a>
-        </Link>
-      </S.LoginBody>
-      <S.BackgroundSymbol>
-        <Symbol color={"white"} size={{ width: "120px", height: "120px" }} />
-      </S.BackgroundSymbol>
-    </S.LoginStyle>
+          <p>
+            {mount ? "You have an account?" : "Don´t have an accout"}
+            <span>
+              <S.ButtonRegister onClick={handleMount}>
+                {mount ? "SignIn" : "SignUp"}
+              </S.ButtonRegister>
+            </span>{" "}
+          </p>
+          <Link href="/">
+            <a>
+              <Symbol
+                color={colors.blue}
+                size={{ width: "58px", height: "58px" }}
+              />
+            </a>
+          </Link>
+        </S.LoginBody>
+        <S.BackgroundSymbol>
+          <Symbol color={"white"} size={{ width: "120px", height: "120px" }} />
+        </S.BackgroundSymbol>
+      </S.LoginStyle>
+    </>
   );
 };
 

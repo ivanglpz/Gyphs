@@ -27,15 +27,17 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    setTheme(JSON.parse(Cookies.get("@theme") || "light"));
+    setTheme(Cookies.get("@theme") || "light");
   }, []);
   useEffect(() => {
-    Cookies.set("@theme", JSON.stringify(theme));
+    Cookies.set("@theme", theme);
   }, [theme]);
 
   useEffect(() => {
     userApp.authentication && router.replace("/Home");
   }, [userApp]);
+  // console.log(CookieTheme);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <UserLoggerContext.Provider value={{ userApp, setUserApp }}>
@@ -65,4 +67,5 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     </ThemeContext.Provider>
   );
 };
+
 export default MyApp;

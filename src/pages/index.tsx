@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -6,6 +5,7 @@ import { Navigation } from "swiper";
 import { SwiperSlide } from "swiper/react";
 import about from "../assets/information.json";
 import Gif from "../components/Gif/Gif";
+import GHead from "../components/Head/Head";
 import Symbol from "../components/Svg/NavBarIcons";
 import { IStateData } from "../hooks/types";
 import useFetchGifs from "../hooks/useFetchGifs";
@@ -16,7 +16,7 @@ import { IAbout } from "../types/types";
 const Index = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
 
-  const useDataGif = useFetchGifs({ method: "trending", limit: 50 });
+  const useDataGif = useFetchGifs({ method: "trending", limit: 30 });
 
   useEffect(() => {
     setData(useDataGif);
@@ -24,9 +24,7 @@ const Index = () => {
 
   return (
     <main>
-      <Head>
-        <title>Gyphs</title>;
-      </Head>
+      <GHead title="Gyphs" />
       <S.NavStyle>
         <Symbol color={colors.blue} size={{ width: "56px", height: "56px" }} />
         <h1>Gyphs</h1>

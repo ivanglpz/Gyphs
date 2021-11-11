@@ -1,7 +1,8 @@
-import Head from "next/head";
 import { FC, useContext, useEffect, useState } from "react";
+import tags from "../assets/tagsHome.json";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
+import GHead from "../components/Head/Head";
 import NavMenu from "../components/NavMenu/NavMenu";
 import Loading from "../components/Svg/Loading";
 import Tags from "../components/Tags/Tags";
@@ -10,13 +11,12 @@ import UserContext from "../hooks/useContext";
 import useFetchGifs from "../hooks/useFetchGifs";
 import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
-import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import * as S from "../styles/pages/HomeStyle";
 import { IFormGif } from "../types/types";
 
-const tags = ["Entertainment", "Funny Moments", "Sports", "Reactions"];
+const Home: FC = (props) => {
+  console.log(props);
 
-const Home: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
   const [form, setForm] = useState<IParams>({} as IParams);
   const [detailGif, setDetailGif] = useState<IFormGif>({} as IFormGif);
@@ -34,7 +34,7 @@ const Home: FC = () => {
   };
 
   const useDataGif = useFetchGifs(
-    Object.keys(form).length === 0 ? { method: "trending", limit: 50 } : form
+    Object.keys(form).length === 0 ? { method: "trending", limit: 30 } : form
   );
 
   useEffect(() => {
@@ -43,9 +43,7 @@ const Home: FC = () => {
 
   return (
     <UserContext.Provider value={{ setDetailGif }}>
-      <Head>
-        <title>Gyphs | Home</title>
-      </Head>
+      <GHead title="Gyphs | Home" />
       {detailGif.mount && (
         <GifDetail setDetailGif={setDetailGif} props={detailGif.props} />
       )}
@@ -67,9 +65,7 @@ const Home: FC = () => {
                   handle={() => handleTags(tag)}
                 />
               ))}
-              <StyleGifsContent>
-                <GifsContent data={data.data} />
-              </StyleGifsContent>
+              <GifsContent data={data.data} />
             </>
           ) : (
             <Loading

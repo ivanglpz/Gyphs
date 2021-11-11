@@ -10,7 +10,7 @@ interface Props {
 
 const ThemeForm: FC<Props> = ({ props }) => {
   return (
-    <div>
+    <>
       <label htmlFor={props.label}>{props.label}</label>
       <input
         type="radio"
@@ -22,7 +22,7 @@ const ThemeForm: FC<Props> = ({ props }) => {
           props.setTheme(event.target.value)
         }
       />
-    </div>
+    </>
   );
 };
 

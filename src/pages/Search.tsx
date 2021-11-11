@@ -1,13 +1,13 @@
 import Cookies from "js-cookie";
-import Head from "next/head";
 import { FC, useContext, useEffect, useState } from "react";
 import tags from "../assets/tags.json";
 import CreateTags from "../components/CreateTags/CreateTags";
 import GifDetail from "../components/GifDetail/GifDetail";
 import GifsContent from "../components/GifsContent/GifsContent";
+import GHead from "../components/Head/Head";
 import NavMenu from "../components/NavMenu/NavMenu";
 import SearchBar from "../components/SearchBar/SearchBar";
-import SelectNumberGifs from "../components/SelectNumberGifs/SelectNumberGifs";
+import SelectGifs from "../components/SelectNumberGifs/SelectGifs";
 import TagsIcon from "../components/Svg/ButtonSearchTags";
 import Loading from "../components/Svg/Loading";
 import Symbol, { SearchIcon } from "../components/Svg/NavBarIcons";
@@ -17,7 +17,6 @@ import UserContext from "../hooks/useContext";
 import useFetchGifs from "../hooks/useFetchGifs";
 import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
-import { StyleGifsContent } from "../styles/components/GifsContent/GifsContentStyle";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
 
@@ -71,13 +70,10 @@ const Search: FC = () => {
   useEffect(() => {
     setData(useDataGif);
   }, [useDataGif]);
-  console.log(tag);
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>
-      <Head>
-        <title>Gyphs | Search</title>
-      </Head>
+      <GHead title="Gyphs | Search" />
       {details.mount && (
         <GifDetail setDetailGif={setDetails} props={details.props} />
       )}
@@ -102,11 +98,7 @@ const Search: FC = () => {
                   <SearchIcon theme={theme} color={colors.blackRaisin} />
                 }
               />
-              <SelectNumberGifs
-                value={filter}
-                theme={theme}
-                setFilter={setFilter}
-              />
+              <SelectGifs {...{ theme: theme, setFilter }} />
             </S.NavSearchBar>
             <div
               style={{ display: "flex", flexWrap: "wrap", margin: "10px 0 " }}
@@ -141,12 +133,8 @@ const Search: FC = () => {
               </div>
             )}
           </div>
-          {data.mount && (
-            <StyleGifsContent>
-              <GifsContent data={data.data} />
-            </StyleGifsContent>
-          )}
-          {typeof data?.data?.length !== "undefined" && data.mount === false && (
+          {data.mount && <GifsContent data={data.data} />}
+          {data.mount === false && (
             <Loading
               color={{
                 colorPrimary: colors.capri,
@@ -154,16 +142,15 @@ const Search: FC = () => {
               }}
             />
           )}
-          {typeof data?.data?.length === "undefined" &&
-            typeof data.mount === "undefined" && (
-              <S.InitGif>
-                <Symbol
-                  color={theme === "light" ? colors.blackRaisin : "white"}
-                  size={{ width: "80px", height: "80px" }}
-                />
-                <p>Search your favorite gif</p>
-              </S.InitGif>
-            )}
+          {Object.keys(data).length === 0 && (
+            <S.InitGif>
+              <Symbol
+                color={theme === "light" ? colors.blackRaisin : "white"}
+                size={{ width: "80px", height: "80px" }}
+              />
+              <p>Search your favorite gif</p>
+            </S.InitGif>
+          )}
         </S.Gifs>
       </S.StyledApp>
     </UserContext.Provider>

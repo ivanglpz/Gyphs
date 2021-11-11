@@ -5,12 +5,11 @@ import { colors } from "../../styles/colors";
 interface IProps {
   theme: string;
   setFilter: Dispatch<SetStateAction<number>>;
-  value: number;
 }
 
 const SelectStyle = styled.select`
-  background-color: red;
-  border: 1px solid ${({ theme }) => (theme === "light" ? "#2C2C2C" : "white")};
+  outline: 1px solid ${({ theme }) => (theme === "light" ? "#2C2C2C" : "white")};
+  outline-offset: -2px;
   border-radius: 5px;
   background-color: ${({ theme }: { theme: string }) =>
     theme === "light" ? "white" : colors.blackRaisin};
@@ -18,24 +17,26 @@ const SelectStyle = styled.select`
     theme === "light" ? "black" : "white"};
 `;
 
-const SelectNumberGifs: FC<IProps> = (props) => {
+const numbers = [5, 10, 15, 20, 25, 30];
+
+const SelectGifs: FC<IProps> = (props) => {
   return (
     <SelectStyle
       theme={props.theme}
-      name="cars"
+      name="gifs"
       id="selects"
       onChange={(event: { target: { value: string | number } }) =>
         props.setFilter(Number(event.target.value))
       }
       defaultValue="DEFAULT"
     >
-      <option value={5}>5</option>
-      <option value={10}>10</option>
-      <option value={15}>15</option>
-      <option value={20}>20</option>
-      <option value="DEFAULT">50</option>
+      {numbers.map((number) => (
+        <option key={number} value={number === 30 ? "DEFAULT" : number}>
+          {number}
+        </option>
+      ))}
     </SelectStyle>
   );
 };
 
-export default SelectNumberGifs;
+export default SelectGifs;

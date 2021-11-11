@@ -3,6 +3,7 @@ import Gif from "../Gif/Gif";
 import styled from "@emotion/styled";
 import { IData } from "../../hooks/types";
 import UserContext from "../../hooks/useContext";
+import { StyleGifsContent } from "../../styles/components/GifsContent/GifsContentStyle";
 
 type IStateData = {
   data: IData[];
@@ -17,7 +18,7 @@ const GifsContent: FC<IStateData> = ({ data }) => {
   const { setDetailGif } = useContext(UserContext);
 
   return (
-    <>
+    <StyleGifsContent>
       {data?.map((gif) => (
         <GifBox key={gif.id}>
           <button
@@ -32,7 +33,7 @@ const GifsContent: FC<IStateData> = ({ data }) => {
           </button>
         </GifBox>
       ))}
-    </>
+    </StyleGifsContent>
   );
 };
 
