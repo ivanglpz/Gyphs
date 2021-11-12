@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import UserLoggerContext from "../hooks/userLoggerContext";
 import ThemeContext from "../hooks/useTheme";
+import { colors } from "../styles/colors";
 import url from "../styles/fonts";
 import { Materialize } from "../styles/Normalize";
 import { IUser } from "../types/types";
@@ -41,16 +42,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           />
           <link
             rel="icon"
-            type="image/png"
+            type="images/png"
             sizes="32x32"
             href="/images/favicon-32x32.png"
           />
           <link
             rel="icon"
-            type="image/png"
+            type="images/png"
             sizes="16x16"
             href="/images/favicon-16x16.png"
           />
+          <link rel="manifest" href="/images/site.webmanifest" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta name="theme-color" content={colors.blue} />
+          <meta property="og:title" content="Gyphs" />
+          <meta property="og:image" content="/images/frontcover.jpg" />
         </Head>
         <Global styles={() => Materialize(theme)} />
         <Component {...pageProps} />
