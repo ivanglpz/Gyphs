@@ -60,6 +60,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <meta name="theme-color" content={colors.blue} />
           <meta property="og:title" content="Gyphs" />
           <meta property="og:image" content="/images/frontcover.jpg" />
+          <meta property="og:image:width" content="526" />
+          <meta property="og:image:height" content="263" />
         </Head>
         <Global styles={() => Materialize(theme)} />
         <Component {...pageProps} />
