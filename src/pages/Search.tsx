@@ -22,7 +22,7 @@ import { colors } from "../styles/colors";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
 import { IUser } from "../types/types";
-
+import newTags from "../assets/newTags.json";
 interface ITags {
   tag: string;
   limit: number;
@@ -69,12 +69,12 @@ const Search: FC = () => {
     }
   };
   useLayoutEffect(() => {
-    const storage: string[] = JSON.parse(Cookies.get("@tags") || "[]");
+    const storage: string[] = JSON.parse(localStorage.getItem("@tags") || "[]");
     setTags(storage?.length === 0 ? tags : storage);
   }, []);
 
   useEffect(() => {
-    tag && Cookies.set("@tags", JSON.stringify(tag));
+    tag && localStorage.setItem("@tags", JSON.stringify(tag));
   }, [tag]);
   const useDataGif = useFetchGifs(form);
 
@@ -109,6 +109,7 @@ const Search: FC = () => {
             }}
           >
             <h2 style={{ width: "130px" }}>Find your favorite gif</h2>
+
             <S.NavSearchBar>
               <SearchBar
                 value={search}

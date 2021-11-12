@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
-import { FC, useState } from "react";
+import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
 import ButtonDelete from "../../Buttons/ButtonDelete";
+import { IHandleEdit } from "../CreateTags";
 
 interface IProps {
   props: {
     tag: string;
-    handleEditTag: ({ tag, newTag }: { newTag: string; tag: string }) => void;
+    setTags: Dispatch<SetStateAction<string[]>>;
+    index: number;
+    data: string[];
+    handleEditTag: ({ index, newTag, event }: IHandleEdit) => void;
     handleDeleteTag: (tag: string) => void;
   };
 }
@@ -29,16 +33,24 @@ const EditTag: FC<IProps> = ({ props }) => {
   const handleChangeTag = (event: { target: { value: string } }) => {
     setNewTag(event.target.value);
   };
+  const handleDeleteTag = (tag: string) => {
+    props.setTags(props.data.filter((dataTag) => dataTag !== tag));
+  };
 
   return (
-    <div key={props.tag}>
+    <form
+      onSubmit={(event) =>
+        props.handleEditTag({ index: props.index, newTag, event })
+      }
+      key={props.tag}
+    >
       <ItemList value={newTag} disabled={edit} onChange={handleChangeTag} />
-      <button onClick={() => setEdit(!edit)}>edit</button>
-      <button onClick={() => props.handleEditTag({ tag: props.tag, newTag })}>
-        Ok
+      <button type="button" onClick={() => setEdit(!edit)}>
+        edit
       </button>
-      <ButtonDelete CustomFuction={() => props.handleDeleteTag(props.tag)} />
-    </div>
+      <button type="submit">Ok</button>
+      <ButtonDelete CustomFuction={() => handleDeleteTag(props.tag)} />
+    </form>
   );
 };
 
