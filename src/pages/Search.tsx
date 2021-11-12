@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
@@ -20,7 +21,7 @@ import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
-import { IUser } from "./types";
+import { IUser } from "../types/types";
 
 interface ITags {
   tag: string;

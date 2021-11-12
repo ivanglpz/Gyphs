@@ -56,7 +56,10 @@ const CreateTags: FC<IProps> = (props) => {
       </p>
       <ul>
         {props.data.map((tag, index) => (
-          <EditTag props={{ tag, index, handleDeleteTag, handleEditTag }} />
+          <EditTag
+            key={tag}
+            props={{ tag, index, handleDeleteTag, handleEditTag }}
+          />
         ))}
       </ul>
     </>

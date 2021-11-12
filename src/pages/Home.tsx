@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from "next/router";
 import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
 import tags from "../assets/tagsHome.json";
@@ -15,7 +16,7 @@ import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import * as S from "../styles/pages/HomeStyle";
 import { IFormGif } from "../types/types";
-import { IUser } from "./types";
+import { IUser } from "../types/types";
 
 const Home: FC = (props) => {
   const [data, setData] = useState<IStateData>({} as IStateData);

@@ -9,7 +9,7 @@ import UserLoggerContext from "../hooks/userLoggerContext";
 import ThemeContext from "../hooks/useTheme";
 import url from "../styles/fonts";
 import { Materialize } from "../styles/Normalize";
-import { IUser } from "./types";
+import { IUser } from "../types/types";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [theme, setTheme] = useState<string>("light");

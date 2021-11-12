@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import React, { FC, useContext } from "react";
 import MyContext from "../../hooks/useTheme";
@@ -60,9 +61,9 @@ const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
               <path
                 d="M14.5 15.75L24 25.5M5 25.5L14.5 15.75L5 25.5ZM24 6L14.4982 15.75L24 6ZM14.4982 15.75L5 6L14.4982 15.75Z"
                 stroke={theme === "light" ? colors.blackRaisin : "white"}
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
@@ -72,6 +73,7 @@ const GifDetail: FC<IGifDetails> = ({ props, setDetailGif }) => {
           <div style={{ margin: "10px 0" }}>
             {socialMedia.map((social) => (
               <button
+                key={social.name + social.id}
                 formTarget="blank"
                 onClick={() =>
                   handleUrl({

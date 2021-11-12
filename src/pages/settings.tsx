@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from "next/router";
 import { FC, useContext, useLayoutEffect } from "react";
 import GHead from "../components/Head/Head";
@@ -6,7 +7,7 @@ import ThemeForm from "../components/ThemeForm/ThemeForm";
 import UserLoggerContext from "../hooks/userLoggerContext";
 import MyContext from "../hooks/useTheme";
 import * as S from "../styles/pages/SettingsStyle";
-import { IUser } from "./types";
+import { IUser } from "../types/types";
 
 const Settings: FC = () => {
   const { theme, setTheme } = useContext(MyContext);
