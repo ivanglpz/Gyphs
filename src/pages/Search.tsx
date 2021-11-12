@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
-import { FC, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
 import tags from "../assets/tags.json";
 import CreateTags from "../components/CreateTags/CreateTags";
 import GifDetail from "../components/GifDetail/GifDetail";
@@ -19,6 +20,7 @@ import MyContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import * as S from "../styles/pages/SearchStyle";
 import { IFormGif } from "../types/types";
+import { IUser } from "./types";
 
 interface ITags {
   tag: string;
@@ -34,6 +36,7 @@ const Search: FC = () => {
   const [createTag, setCreateTag] = useState<boolean>(false);
   const [tag, setTags] = useState<string[]>(tags);
   const { theme } = useContext(MyContext);
+  const router = useRouter();
 
   const handleTags = (tag: string): void => {
     if (data.result === tag) return;
@@ -64,7 +67,7 @@ const Search: FC = () => {
       setData({ ...data, mount: false });
     }
   };
-  useEffect(() => {
+  useLayoutEffect(() => {
     const storage: string[] = JSON.parse(Cookies.get("@tags") || "[]");
     setTags(storage?.length === 0 ? tags : storage);
   }, []);
@@ -77,6 +80,13 @@ const Search: FC = () => {
   useEffect(() => {
     setData(useDataGif);
   }, [useDataGif]);
+
+  useLayoutEffect(() => {
+    const { authentication }: IUser = JSON.parse(
+      localStorage.getItem("@user") || "{}"
+    );
+    !authentication && router.replace("/");
+  }, []);
 
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails }}>

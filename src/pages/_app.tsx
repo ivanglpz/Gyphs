@@ -1,4 +1,5 @@
 import { Global } from "@emotion/react";
+import Cookies from "js-cookie";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -8,35 +9,25 @@ import UserLoggerContext from "../hooks/userLoggerContext";
 import ThemeContext from "../hooks/useTheme";
 import url from "../styles/fonts";
 import { Materialize } from "../styles/Normalize";
-import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-
-export interface IUser {
-  authentication?: boolean;
-  user?: {
-    id: string | number;
-    username: string;
-  };
-  type?: string;
-  token?: string;
-}
+import { IUser } from "./types";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [theme, setTheme] = useState<string>("light");
   const [userApp, setUserApp] = useState<IUser>({} as IUser);
-  const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTheme(Cookies.get("@theme") || "light");
+    setUserApp(JSON.parse(localStorage.getItem("@user") || "{}"));
   }, []);
+
   useEffect(() => {
     Cookies.set("@theme", theme);
   }, [theme]);
 
   useEffect(() => {
-    userApp.authentication && router.replace("/Home");
+    userApp.authentication &&
+      localStorage.setItem("@user", JSON.stringify(userApp));
   }, [userApp]);
-  // console.log(CookieTheme);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

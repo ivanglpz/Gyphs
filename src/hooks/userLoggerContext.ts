@@ -8,6 +8,7 @@ export interface IData {
   };
   type?: string;
   token?: string;
+  message?: string;
 }
 
 export interface IUser {

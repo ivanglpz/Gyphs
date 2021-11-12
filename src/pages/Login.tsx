@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FC, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { FC, useContext, useEffect, useLayoutEffect, useState } from "react";
 import FormLogin from "../components/FormLogin/FormLogin";
 import GHead from "../components/Head/Head";
 import Symbol from "../components/Svg/NavBarIcons";
@@ -7,7 +8,6 @@ import { useLoginUser } from "../hooks/useLoginUser";
 import userLoggerContext from "../hooks/userLoggerContext";
 import { colors } from "../styles/colors";
 import * as S from "../styles/pages/LoginStyle";
-
 export interface IUser {
   username: string;
   password: string;
@@ -22,6 +22,8 @@ const Login: FC = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [mount, setMount] = useState<boolean>(false);
   const [body, setBody] = useState<IBody>({} as IBody);
+  const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const { setUserApp } = useContext(userLoggerContext);
 
@@ -31,6 +33,7 @@ const Login: FC = () => {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (mount === true && user.username && user.password) {
+      setMessage("");
       setBody({
         type: "sign",
         username: user.username,
@@ -48,12 +51,25 @@ const Login: FC = () => {
     setMount(!mount);
     setBody({ type: "", username: "", password: "" });
     setUser({ username: "", password: "" } as IUser);
+    setMessage("");
   };
 
   const login = useLoginUser({ body });
+
   useEffect(() => {
+    login.message && setMessage(login.message);
     setUserApp(login);
+    setTimeout(() => {
+      login.authentication && router.replace("/Home");
+    }, 500);
   }, [login]);
+
+  useLayoutEffect(() => {
+    const { authentication }: any = JSON.parse(
+      localStorage.getItem("@user") || "{}"
+    );
+    authentication && router.replace("/Home");
+  }, []);
 
   return (
     <>
@@ -61,17 +77,18 @@ const Login: FC = () => {
       <S.LoginStyle>
         <S.LoginBody>
           <FormLogin
-            title={mount ? "SignUp" : "SignIn"}
+            title={mount ? "Sign Up" : "Sign In"}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             user={user}
           />
+          {message && <p> {message}</p>}
 
           <p>
             {mount ? "You have an account?" : "Don´t have an accout"}
             <span>
               <S.ButtonRegister onClick={handleMount}>
-                {mount ? "SignIn" : "SignUp"}
+                {mount ? "Sign In" : "Sign Up"}
               </S.ButtonRegister>
             </span>{" "}
           </p>

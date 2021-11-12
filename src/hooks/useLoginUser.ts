@@ -1,16 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IData } from "./userLoggerContext";
 
-interface IFetch {
-  authentication: boolean;
-  user: {
-    id: string | number;
-    username: string;
-  };
-  type: string;
-  token: string;
-}
-
 export const useLoginUser = ({
   body,
 }: {
