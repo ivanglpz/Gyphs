@@ -19,6 +19,7 @@ interface IProps {
 }
 const ItemList = styled.input`
   width: auto;
+  height: 41px;
   border: none;
   margin: 0 0 0 5px;
   outline: 1px solid gray;

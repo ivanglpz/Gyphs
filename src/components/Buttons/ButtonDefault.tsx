@@ -43,7 +43,6 @@ const Button = styled.button<IButton>`
   box-shadow: ${({ styles }) =>
     styles.disabledShadow ? "none" : "2px 2px gray"};
   /* transform: ${({ styles }) => size[styles.size]}; */
-  height: 41px;
   color: ${({ styles }) => (styles.color === "default" ? "black" : "white")};
   padding: 5px 10px;
   &:hover {
