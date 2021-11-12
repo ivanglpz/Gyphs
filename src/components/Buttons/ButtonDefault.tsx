@@ -38,6 +38,7 @@ const size: TSize = {
 const Button = styled.button<IButton>`
   cursor: pointer;
   border-radius: 5px;
+  margin: 0 5px;
   border: ${({ styles }) => (styles.outline ? "1px solid blue" : "none")};
   background-color: ${({ styles }) => colors[styles.color]};
   box-shadow: ${({ styles }) =>

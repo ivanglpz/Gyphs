@@ -34,6 +34,7 @@ const ItemList = styled.input`
       outline-offset: -2px;
     `}
   border-radius: 5px;
+  margin: 0px 10px 0 0;
 `;
 
 const EditTag: FC<IProps> = ({ props }) => {
@@ -55,7 +56,7 @@ const EditTag: FC<IProps> = ({ props }) => {
         props.handleEditTag({ index: props.index, newTag, event })
       }
       key={props.tag}
-      style={{ display: "flex" }}
+      style={{ display: "flex", margin: "10px 0" }}
     >
       <ItemList
         theme={theme}
