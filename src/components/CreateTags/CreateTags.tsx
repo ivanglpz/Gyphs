@@ -46,7 +46,7 @@ const CreateTags: FC<IProps> = (props) => {
   const handleEditTag = ({ index, newTag, event }: IHandleEdit) => {
     event.preventDefault();
     props.setMountTags(false);
-    handleTags(newTag);
+    handleTags && handleTags(newTag);
     props.setTags([(props.data[index] = newTag)]);
   };
 
