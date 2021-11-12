@@ -1,14 +1,5 @@
-import styled from "@emotion/styled";
-import {
-  Dispatch,
-  FC,
-  FormEvent,
-  FormEventHandler,
-  SetStateAction,
-  useState,
-} from "react";
+import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
 import ButtonAdd from "../Buttons/ButtonAdd";
-import ButtonDelete from "../Buttons/ButtonDelete";
 import SearchBar from "../SearchBar/SearchBar";
 import EditTag from "./EditTag/EditTag";
 export interface IHandleEdit {

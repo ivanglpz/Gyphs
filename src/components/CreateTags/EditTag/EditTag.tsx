@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import ButtonDelete from "../../Buttons/ButtonDelete";
 import { IHandleEdit } from "../CreateTags";
 
