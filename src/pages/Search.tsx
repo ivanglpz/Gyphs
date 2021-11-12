@@ -80,6 +80,9 @@ const Search: FC = () => {
 
   useEffect(() => {
     setData(useDataGif);
+    return () => {
+      setData({} as IStateData);
+    };
   }, [useDataGif]);
 
   useLayoutEffect(() => {

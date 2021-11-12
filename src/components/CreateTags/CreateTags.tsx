@@ -15,8 +15,7 @@ interface IProps {
 const CreateTags: FC<IProps> = (props) => {
   const [valueTag, setValueTag] = useState("");
 
-  const handleAddTag = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  const handleAddTag = (valueTag: string) => {
     if (valueTag) {
       if (props.data.find((tag) => tag === valueTag)) {
         props.setMountTags(false);
@@ -34,9 +33,16 @@ const CreateTags: FC<IProps> = (props) => {
   };
 
   const handleEditTag = ({ tag, newTag }: { newTag: string; tag: string }) => {
-    if (props.data.filter((dataTag) => dataTag === tag)) {
+    if (props.data[tag]) {
       handleDeleteTag(tag);
+    } else {
+      handleAddTag(newTag);
     }
+    // if (props.data.filter((dataTags) => dataTags === newTag)) {
+    //   handleAddTag(newTag);
+    // } else {
+    //   handleDeleteTag(tag);
+    // }
   };
 
   console.log(props.data);
@@ -47,7 +53,7 @@ const CreateTags: FC<IProps> = (props) => {
           IconButton={<ButtonAdd />}
           placeHolder="Write your tag here"
           setValue={setValueTag}
-          handleSubmit={handleAddTag}
+          handleSubmit={() => handleAddTag(valueTag)}
           value={valueTag}
         />
       </div>
@@ -55,11 +61,8 @@ const CreateTags: FC<IProps> = (props) => {
         <b>List</b>
       </p>
       <ul>
-        {props.data.map((tag, index) => (
-          <EditTag
-            key={tag}
-            props={{ tag, index, handleDeleteTag, handleEditTag }}
-          />
+        {props.data.map((tag) => (
+          <EditTag key={tag} props={{ tag, handleDeleteTag, handleEditTag }} />
         ))}
       </ul>
     </>

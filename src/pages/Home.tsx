@@ -18,7 +18,7 @@ import * as S from "../styles/pages/HomeStyle";
 import { IFormGif } from "../types/types";
 import { IUser } from "../types/types";
 
-const Home: FC = (props) => {
+const Home: FC = () => {
   const [data, setData] = useState<IStateData>({} as IStateData);
   const [form, setForm] = useState<IParams>({} as IParams);
   const [detailGif, setDetailGif] = useState<IFormGif>({} as IFormGif);
@@ -51,8 +51,12 @@ const Home: FC = (props) => {
     );
     !authentication && router.replace("/");
   }, []);
+
   useEffect(() => {
     setData(useDataGif);
+    return () => {
+      setData({} as IStateData);
+    };
   }, [useDataGif]);
 
   return (
