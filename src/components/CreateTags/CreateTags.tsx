@@ -1,4 +1,12 @@
-import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FC,
+  FormEvent,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
+import UserContext from "../../hooks/useContext";
 import ButtonAdd from "../Buttons/ButtonAdd";
 import SearchBar from "../SearchBar/SearchBar";
 import EditTag from "./EditTag/EditTag";
@@ -16,7 +24,7 @@ interface IProps {
 
 const CreateTags: FC<IProps> = (props) => {
   const [valueTag, setValueTag] = useState("");
-
+  const { handleTags } = useContext(UserContext);
   const handleAddTag = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (valueTag) {
@@ -38,6 +46,7 @@ const CreateTags: FC<IProps> = (props) => {
   const handleEditTag = ({ index, newTag, event }: IHandleEdit) => {
     event.preventDefault();
     props.setMountTags(false);
+    handleTags(newTag);
     props.setTags([(props.data[index] = newTag)]);
   };
 
@@ -55,21 +64,19 @@ const CreateTags: FC<IProps> = (props) => {
       <p>
         <b>List</b>
       </p>
-      <ul>
-        {props.data.map((tag, index) => (
-          <EditTag
-            key={tag}
-            props={{
-              tag,
-              index,
-              setTags: props.setTags,
-              data: props.data,
-              handleDeleteTag,
-              handleEditTag,
-            }}
-          />
-        ))}
-      </ul>
+      {props.data.map((tag, index) => (
+        <EditTag
+          key={tag}
+          props={{
+            tag,
+            index,
+            setTags: props.setTags,
+            data: props.data,
+            handleDeleteTag,
+            handleEditTag,
+          }}
+        />
+      ))}
     </>
   );
 };

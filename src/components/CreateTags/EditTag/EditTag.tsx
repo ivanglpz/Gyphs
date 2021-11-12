@@ -1,5 +1,9 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useContext, useState } from "react";
+import ThemeContext from "../../../hooks/useTheme";
+import { colors } from "../../../styles/colors";
+import ButtonDefault from "../../Buttons/ButtonDefault";
 import ButtonDelete from "../../Buttons/ButtonDelete";
 import { IHandleEdit } from "../CreateTags";
 
@@ -14,19 +18,26 @@ interface IProps {
   };
 }
 const ItemList = styled.input`
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-  }
+  width: auto;
+  border: none;
+  margin: 0 0 0 5px;
+  outline: 1px solid gray;
+  outline-offset: -2px;
+  background-color: rgba(0, 0, 0, 0.3);
+  ${({ disabled, theme }) =>
+    !disabled &&
+    css`
+      background-color: transparent;
+
+      outline: 1px solid ${theme === "light" ? "#2C2C2C" : "white"};
+      outline-offset: -2px;
+    `}
+  border-radius: 5px;
 `;
 
 const EditTag: FC<IProps> = ({ props }) => {
   const [edit, setEdit] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   const [newTag, setNewTag] = useState(props.tag);
 
@@ -43,12 +54,36 @@ const EditTag: FC<IProps> = ({ props }) => {
         props.handleEditTag({ index: props.index, newTag, event })
       }
       key={props.tag}
+      style={{ display: "flex" }}
     >
-      <ItemList value={newTag} disabled={edit} onChange={handleChangeTag} />
-      <button type="button" onClick={() => setEdit(!edit)}>
-        edit
-      </button>
-      <button type="submit">Ok</button>
+      <ItemList
+        theme={theme}
+        value={newTag}
+        disabled={edit}
+        onChange={handleChangeTag}
+      />
+      {edit && (
+        <ButtonDefault
+          {...{
+            title: "Edit",
+            type: "button",
+            size: "md",
+            disabledShadow: true,
+            color: "primary",
+            function: () => setEdit(!edit),
+          }}
+        />
+      )}
+      <ButtonDefault
+        {...{
+          title: "Ok",
+          type: "submit",
+          size: "md",
+          disabledShadow: true,
+          color: "secondary",
+          function: () => setEdit(!edit),
+        }}
+      />
       <ButtonDelete CustomFuction={() => handleDeleteTag(props.tag)} />
     </form>
   );

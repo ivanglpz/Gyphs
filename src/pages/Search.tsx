@@ -93,7 +93,7 @@ const Search: FC = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ setDetailGif: setDetails }}>
+    <UserContext.Provider value={{ setDetailGif: setDetails, handleTags }}>
       <GHead title="Gyphs | Search" />
       {details.mount && (
         <GifDetail setDetailGif={setDetails} props={details.props} />

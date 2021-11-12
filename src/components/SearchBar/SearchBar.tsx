@@ -1,6 +1,6 @@
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { ChangeEvent, Dispatch, FC, SetStateAction, useContext } from "react";
-import MyContext from "../../hooks/useTheme";
+import ThemeContext from "../../hooks/useTheme";
 import * as S from "../../styles/components/SearchBar/SearchBarStyle";
 import ButtonDelete from "../Buttons/ButtonDelete";
 interface Props {
@@ -17,7 +17,8 @@ const SearchBar: FC<Props> = ({
   IconButton,
   placeHolder,
 }) => {
-  const { theme } = useContext(MyContext);
+  const { theme } = useContext(ThemeContext);
+
   return (
     <S.StyledForm onSubmit={handleSubmit} theme={theme}>
       <input
