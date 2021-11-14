@@ -21,6 +21,7 @@ const Login: FC = () => {
   const { setUserApp } = useContext(userLoggerContext);
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
+    setMessage("");
     setUser({ ...user, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -28,15 +29,17 @@ const Login: FC = () => {
     if (mount === true && user.username && user.password) {
       setMessage("");
       setBody({ ...user, type: "sign" });
-    } else {
+    } else if (mount === false && user.username && user.password) {
       setMessage("");
       setBody({ ...user, type: "login" });
+    } else {
+      setMessage("Complete the form please");
     }
   };
   const handleMount = () => {
     setMount(!mount);
-    setBody({} as IBody);
-    setUser({} as IUser);
+    setBody({ type: "", username: "", password: "" } as IBody);
+    setUser({ username: "", password: "" } as IUser);
     setMessage("");
   };
 
