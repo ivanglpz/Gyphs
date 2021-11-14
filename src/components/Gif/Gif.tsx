@@ -23,9 +23,9 @@ const GifImg = styled(Image)`
 const Gif: FC<IGifData> = ({ gif }) => {
   return (
     <GifImg
-      loader={({ width }) =>
-        `${gif.images.fixed_height.url}?w=${width}&q=${25}`
-      }
+      // loader={({ width }) =>
+      //   `${gif.images.fixed_height.url}?w=${width}&q=${25}`
+      // }
       src={gif.images.fixed_height.url}
       alt={gif.title}
       // layout="fixed"

@@ -19,3 +19,13 @@ export interface IAbout {
   text: string;
   url: string;
 }
+export interface IUser {
+  username: string;
+  password: string;
+}
+
+interface IBody {
+  type: string;
+  username: string;
+  password: string;
+}

@@ -6,24 +6,16 @@ import FormLogin from "../components/FormLogin/FormLogin";
 import GHead from "../components/Head/Head";
 import Symbol from "../components/Svg/NavBarIcons";
 import { useLoginUser } from "../hooks/useLoginUser";
-import userLoggerContext from "../hooks/userLoggerContext";
+import userLoggerContext, { IData } from "../hooks/userLoggerContext";
 import { colors } from "../styles/colors";
 import * as S from "../styles/pages/LoginStyle";
-export interface IUser {
-  username: string;
-  password: string;
-}
+import { IBody, IUser } from "../types/types";
 
-interface IBody {
-  type: string;
-  username: string;
-  password: string;
-}
 const Login: FC = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [mount, setMount] = useState<boolean>(false);
   const [body, setBody] = useState<IBody>({} as IBody);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string>("");
   const router = useRouter();
 
   const { setUserApp } = useContext(userLoggerContext);
@@ -35,23 +27,16 @@ const Login: FC = () => {
     event.preventDefault();
     if (mount === true && user.username && user.password) {
       setMessage("");
-      setBody({
-        type: "sign",
-        username: user.username,
-        password: user.password,
-      });
+      setBody({ ...user, type: "sign" });
     } else {
-      setBody({
-        type: "login",
-        username: user.username,
-        password: user.password,
-      });
+      setMessage("");
+      setBody({ ...user, type: "login" });
     }
   };
   const handleMount = () => {
     setMount(!mount);
-    setBody({ type: "", username: "", password: "" });
-    setUser({ username: "", password: "" } as IUser);
+    setBody({} as IBody);
+    setUser({} as IUser);
     setMessage("");
   };
 
@@ -66,7 +51,7 @@ const Login: FC = () => {
   }, [login]);
 
   useLayoutEffect(() => {
-    const { authentication }: any = JSON.parse(
+    const { authentication }: IData = JSON.parse(
       localStorage.getItem("@user") || "{}"
     );
     authentication && router.replace("/Home");

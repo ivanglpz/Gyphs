@@ -5,16 +5,15 @@ import Head from "next/head";
 import { useEffect, useLayoutEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
-import UserLoggerContext from "../hooks/userLoggerContext";
+import UserLoggerContext, { IData } from "../hooks/userLoggerContext";
 import ThemeContext from "../hooks/useTheme";
 import { colors } from "../styles/colors";
 import url from "../styles/fonts";
 import { Materialize } from "../styles/Normalize";
-import { IUser } from "../types/types";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [theme, setTheme] = useState<string>("light");
-  const [userApp, setUserApp] = useState<IUser>({} as IUser);
+  const [userApp, setUserApp] = useState<IData>({} as IData);
 
   useLayoutEffect(() => {
     setTheme(Cookies.get("@theme") || "light");

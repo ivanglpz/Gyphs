@@ -14,10 +14,8 @@ import * as S from "../styles/pages/IndexStyle";
 import { IAbout } from "../types/types";
 
 const Index = () => {
-  const [data, setData] = useState<IStateData>({} as IStateData);
-
+  const [{ data }, setData] = useState<IStateData>({} as IStateData);
   const useDataGif = useFetchGifs({ method: "trending", limit: 30 });
-
   useEffect(() => {
     setData(useDataGif);
   }, [useDataGif]);
@@ -45,7 +43,7 @@ const Index = () => {
             spaceBetween={2}
             slidesPerView={2}
           >
-            {data?.data?.map((gif) => (
+            {data?.map((gif) => (
               <SwiperSlide key={gif.id}>
                 <Gif gif={{ title: gif.title, images: gif.images }} />
               </SwiperSlide>
