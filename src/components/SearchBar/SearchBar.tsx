@@ -19,6 +19,10 @@ const SearchBar: FC<Props> = ({
 }) => {
   const { theme } = useContext(ThemeContext);
 
+  const FirstCharacter = (str: string) => {
+    setValue(str.charAt(0).toUpperCase() + str.slice(1));
+  };
+
   return (
     <S.StyledForm onSubmit={handleSubmit} theme={theme}>
       <input
@@ -26,7 +30,7 @@ const SearchBar: FC<Props> = ({
         placeholder={placeHolder}
         value={value}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          setValue(event.target.value)
+          FirstCharacter(event.target.value)
         }
       />
       {value && <ButtonDelete CustomFuction={() => setValue("")} />}

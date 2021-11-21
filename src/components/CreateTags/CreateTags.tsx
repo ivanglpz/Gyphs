@@ -1,60 +1,47 @@
-import {
-  Dispatch,
-  FC,
-  FormEvent,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-import UserContext from "../../hooks/useContext";
+import { FC, useState } from "react";
 import ButtonAdd from "../Buttons/ButtonAdd";
+import { ICreateTags, IHETag } from "../CreateTags/types";
 import SearchBar from "../SearchBar/SearchBar";
 import EditTag from "./EditTag/EditTag";
-export interface IHandleEdit {
-  oldTag: string;
-  newTag: string;
-  event: FormEvent<HTMLFormElement>;
-}
-interface IProps {
-  setTags: Dispatch<SetStateAction<string[]>>;
-  setMountTags: Dispatch<SetStateAction<boolean>>;
-  data: string[];
-  handleTags: (tag: string) => void;
-}
 
-const CreateTags: FC<IProps> = (props) => {
+const CreateTags: FC<ICreateTags> = ({
+  data,
+  setMountTags,
+  setTags,
+  handleTags,
+}) => {
   const [valueTag, setValueTag] = useState("");
-  const { handleTags } = useContext(UserContext);
-  const handleAddTag = (event: { preventDefault: () => void }) => {
+
+  const handleAddTag = (event: { preventDefault: () => void }): void => {
     event.preventDefault();
     if (valueTag) {
-      if (props.data.find((tag) => tag === valueTag)) {
-        props.setMountTags(false);
-      } else if (props.data.length < 5) {
-        props.setTags([...props.data, valueTag]);
-        props.handleTags(valueTag);
-        props.setMountTags(false);
+      if (data.find((tag) => tag === valueTag)) {
+        setMountTags(false);
+      } else if (data.length < 5) {
+        setTags([...data, valueTag]);
+        handleTags(valueTag);
+        setMountTags(false);
       } else {
-        props.setMountTags(false);
+        setMountTags(false);
       }
     }
   };
-  const handleDeleteTag = (tag: string) => {
-    props.setTags(props.data.filter((dataTag) => dataTag !== tag));
+  const handleDeleteTag = (tag: string): void => {
+    setTags(data.filter((dataTag) => dataTag !== tag));
   };
 
-  const handleEditTag = ({ newTag, oldTag, event }: IHandleEdit) => {
+  const handleEditTag = ({ newTag, oldTag, event }: IHETag): void => {
     event.preventDefault();
-
-    const newDatas = props.data.map((tag) => {
-      if (tag === oldTag) {
-        return (tag = newTag);
-      } else {
-        return tag;
-      }
-    });
-    props.setMountTags(false);
-    props.setTags(newDatas);
+    if (newTag) {
+      const newData = data.map((tag) =>
+        tag === oldTag ? (tag = newTag) : tag
+      );
+      handleTags(newTag);
+      setMountTags(false);
+      setTags(newData);
+    } else {
+      setMountTags(false);
+    }
   };
   return (
     <>
@@ -70,17 +57,10 @@ const CreateTags: FC<IProps> = (props) => {
       <p>
         <b>List</b>
       </p>
-      {props.data.map((tag, index) => (
+      {data.map((tag) => (
         <EditTag
           key={tag}
-          props={{
-            tag,
-            index,
-            setTags: props.setTags,
-            data: props.data,
-            handleDeleteTag,
-            handleEditTag,
-          }}
+          {...{ tag, data, setTags, handleEditTag, handleDeleteTag }}
         />
       ))}
     </>

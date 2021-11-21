@@ -2,20 +2,16 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Dispatch, FC, SetStateAction, useContext, useState } from "react";
 import ThemeContext from "../../../hooks/useTheme";
-import { colors } from "../../../styles/colors";
 import ButtonDefault from "../../Buttons/ButtonDefault";
 import ButtonDelete from "../../Buttons/ButtonDelete";
-import { IHandleEdit } from "../CreateTags";
+import { IHETag } from "../../CreateTags/types";
 
 interface IProps {
-  props: {
-    tag: string;
-    setTags: Dispatch<SetStateAction<string[]>>;
-    index: number;
-    data: string[];
-    handleEditTag: ({ newTag, oldTag, event }: IHandleEdit) => void;
-    handleDeleteTag: (tag: string) => void;
-  };
+  tag: string;
+  setTags: Dispatch<SetStateAction<string[]>>;
+  data: string[];
+  handleEditTag: ({ newTag, oldTag, event }: IHETag) => void;
+  handleDeleteTag: (tag: string) => void;
 }
 const ItemList = styled.input`
   width: auto;
@@ -37,25 +33,23 @@ const ItemList = styled.input`
   margin: 0px 10px 0 0;
 `;
 
-const EditTag: FC<IProps> = ({ props }) => {
+const EditTag: FC<IProps> = ({ tag, handleEditTag, handleDeleteTag }) => {
   const [edit, setEdit] = useState(true);
   const { theme } = useContext(ThemeContext);
+  const [newTag, setNewTag] = useState(tag);
 
-  const [newTag, setNewTag] = useState(props.tag);
+  const FirstCharacter = (str: string) => {
+    setNewTag(str.charAt(0).toUpperCase() + str.slice(1));
+  };
 
   const handleChangeTag = (event: { target: { value: string } }) => {
-    setNewTag(event.target.value);
-  };
-  const handleDeleteTag = (tag: string) => {
-    props.setTags(props.data.filter((dataTag) => dataTag !== tag));
+    FirstCharacter(event.target.value);
   };
 
   return (
     <form
-      onSubmit={(event) =>
-        props.handleEditTag({ oldTag: props.tag, newTag, event })
-      }
-      key={props.tag}
+      onSubmit={(event) => handleEditTag({ oldTag: tag, newTag, event })}
+      key={tag}
       style={{ display: "flex", margin: "10px 0" }}
     >
       <ItemList
@@ -86,7 +80,7 @@ const EditTag: FC<IProps> = ({ props }) => {
           function: () => setEdit(!edit),
         }}
       />
-      <ButtonDelete CustomFuction={() => handleDeleteTag(props.tag)} />
+      <ButtonDelete CustomFuction={() => handleDeleteTag(tag)} />
     </form>
   );
 };
