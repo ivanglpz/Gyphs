@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { colors } from "./colors";
 
 export const Materialize = (theme: string) => css`
   /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -21,18 +20,9 @@ export const Materialize = (theme: string) => css`
  */
   body {
     margin: 0;
-    background-color: ${theme === "light" ? "white" : colors.blackRaisin};
-    color: ${theme === "light" ? colors.blackRaisin : "white"};
     transition: 0.3s;
   }
-  input {
-    color: ${theme === "light" ? colors.blackRaisin : "white"};
-  }
-  a {
-    color: ${theme === "light" ? colors.blackRaisin : "white"};
 
-    text-decoration: none;
-  }
   main {
     display: block;
   }

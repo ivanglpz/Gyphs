@@ -28,7 +28,6 @@ const Gif: FC<IGifData> = ({ gif }) => {
       }
       src={gif.images.fixed_height.url}
       alt={gif.title}
-      // layout="fixed"
       width={Number(gif.images.fixed_height.width)}
       height={200}
     />

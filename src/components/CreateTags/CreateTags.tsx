@@ -11,7 +11,7 @@ import ButtonAdd from "../Buttons/ButtonAdd";
 import SearchBar from "../SearchBar/SearchBar";
 import EditTag from "./EditTag/EditTag";
 export interface IHandleEdit {
-  index: number;
+  oldTag: string;
   newTag: string;
   event: FormEvent<HTMLFormElement>;
 }
@@ -43,13 +43,18 @@ const CreateTags: FC<IProps> = (props) => {
     props.setTags(props.data.filter((dataTag) => dataTag !== tag));
   };
 
-  const handleEditTag = ({ index, newTag, event }: IHandleEdit) => {
+  const handleEditTag = ({ newTag, oldTag, event }: IHandleEdit) => {
     event.preventDefault();
-    props.setMountTags(false);
-    handleTags && handleTags(newTag);
-    props.setTags([(props.data[index] = newTag)]);
-  };
 
+    const newDatas = props.data.map((tag) => {
+      if (tag === oldTag) {
+        return (tag = newTag);
+      } else {
+        return tag;
+      }
+    });
+    props.setTags(newDatas);
+  };
   return (
     <>
       <div style={{ display: "flex" }}>

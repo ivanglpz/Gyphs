@@ -13,7 +13,7 @@ interface IProps {
     setTags: Dispatch<SetStateAction<string[]>>;
     index: number;
     data: string[];
-    handleEditTag: ({ index, newTag, event }: IHandleEdit) => void;
+    handleEditTag: ({ newTag, oldTag, event }: IHandleEdit) => void;
     handleDeleteTag: (tag: string) => void;
   };
 }
@@ -53,7 +53,7 @@ const EditTag: FC<IProps> = ({ props }) => {
   return (
     <form
       onSubmit={(event) =>
-        props.handleEditTag({ index: props.index, newTag, event })
+        props.handleEditTag({ oldTag: props.tag, newTag, event })
       }
       key={props.tag}
       style={{ display: "flex", margin: "10px 0" }}
