@@ -33,14 +33,18 @@ const CreateTags: FC<ICreateTags> = ({
   const handleEditTag = ({ newTag, oldTag, event }: IHETag): void => {
     event.preventDefault();
     if (newTag) {
-      const newData = data.map((tag) =>
-        tag === oldTag ? (tag = newTag) : tag
-      );
-      handleTags(newTag);
-      setMountTags(false);
-      setTags(newData);
-    } else {
-      setMountTags(false);
+      if (data.find((tag) => tag === newTag)) {
+        setMountTags(false);
+      } else if (data.length < 5) {
+        const newData = data.map((tag) =>
+          tag === oldTag ? (tag = newTag) : tag
+        );
+        handleTags(newTag);
+        setMountTags(false);
+        setTags(newData);
+      } else {
+        setMountTags(false);
+      }
     }
   };
   return (
