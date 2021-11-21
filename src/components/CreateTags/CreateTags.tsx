@@ -53,6 +53,7 @@ const CreateTags: FC<IProps> = (props) => {
         return tag;
       }
     });
+    props.setMountTags(false);
     props.setTags(newDatas);
   };
   return (
