@@ -15,17 +15,10 @@ const Settings: FC = () => {
   const { userApp, setUserApp } = useContext(UserLoggerContext);
 
   const handlelogOut = () => {
-    router.replace("/Login");
+    router.replace("/");
     setUserApp({});
-    localStorage.removeItem("@user");
+    // localStorage.removeItem("@user");
   };
-
-  useLayoutEffect(() => {
-    const { authentication }: IUser = JSON.parse(
-      localStorage.getItem("@user") || "{}"
-    );
-    !authentication && router.replace("/");
-  }, []);
 
   return (
     <>

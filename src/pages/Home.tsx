@@ -42,17 +42,6 @@ const Home: FC = () => {
   );
 
   useEffect(() => {
-    setUserApp(JSON.parse(localStorage.getItem("@user") || "{}"));
-  }, []);
-
-  useLayoutEffect(() => {
-    const { authentication }: IUser = JSON.parse(
-      localStorage.getItem("@user") || "{}"
-    );
-    !authentication && router.replace("/");
-  }, []);
-
-  useEffect(() => {
     setData(useDataGif);
     return () => {
       setData({} as IStateData);

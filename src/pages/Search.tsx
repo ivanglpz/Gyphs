@@ -85,13 +85,6 @@ const Search: FC = () => {
     };
   }, [useDataGif]);
 
-  useLayoutEffect(() => {
-    const { authentication }: IUser = JSON.parse(
-      localStorage.getItem("@user") || "{}"
-    );
-    !authentication && router.replace("/");
-  }, []);
-
   return (
     <UserContext.Provider value={{ setDetailGif: setDetails, handleTags }}>
       <GHead title="Gyphs | Search" />

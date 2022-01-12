@@ -31,7 +31,7 @@ const Index = () => {
         <S.Home>
           <h2>Find your favorites gifs and have fun</h2>
           <p>find all kinds of gifs, and share it with your friends.</p>
-          <Link href="/Login" passHref>
+          <Link href="/Home" passHref>
             <S.ButtonLink>Start</S.ButtonLink>
           </Link>
         </S.Home>
